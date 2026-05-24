@@ -363,7 +363,7 @@ export function getLikertProfile(ans) {
     emprendedor:    (v('i04') + v('i12')) / 2,
     administrativo: (v('i06') + v('i08')) / 2,
     servicios:      (v('i07') + v('i01')) / 2,
-    creativo:       (v('i11') + v('i12')) / 2,
+    creativo:       v('i11'),          // solo i11: crear contenido/diseñar/expresar ideas
   };
 }
 

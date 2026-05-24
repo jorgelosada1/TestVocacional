@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import {
@@ -74,23 +74,26 @@ function WelcomeScreen({ onStart }) {
 }
 
 /* ── FORM FIELD COMPONENTS (outside FormScreen to avoid remount on re-render) ── */
-function FormField({ k, label, type='text', ph, form, errors, touched, set }) {
+function FormField({ k, label, type='text', ph, form, errors, touched, set, hint }) {
   return <div className="form-group">
-    <label className="form-label">{label}</label>
+    <label className="form-label" htmlFor={k}>{label}</label>
     <input
+      id={k}
       className={`form-input${errors[k]&&touched[k]?' error':''}`}
       type={type} placeholder={ph}
       value={form[k]}
       onChange={e => set(k, e.target.value)}
     />
+    {hint && <p className="form-hint">{hint}</p>}
     {errors[k]&&touched[k] && <p className="form-error">{errors[k]}</p>}
   </div>;
 }
 
 function FormSelect({ k, label, opts, form, errors, touched, set }) {
   return <div className="form-group">
-    <label className="form-label">{label}</label>
+    <label className="form-label" htmlFor={k}>{label}</label>
     <select
+      id={k}
       className={`form-input${errors[k]&&touched[k]?' error':''}`}
       value={form[k]}
       onChange={e => set(k, e.target.value)}
@@ -164,7 +167,8 @@ function FormScreen({ onSubmit, onBack }) {
         <FormSelect k="situacion" label="Actualmente…" opts={SITUACIONES} {...fp}/>
       </div>
       <FormSelect k="busqueda" label="¿Qué buscas hoy?" opts={BUSQUEDAS} {...fp}/>
-      <FormField k="cc" label="Cédula / Documento de identidad" ph="Ej: 1234567890" {...fp}/>
+      <FormField k="cc" label="Cédula / Documento de identidad" ph="Ej: 1234567890" {...fp}
+        hint="Tu documento se usa únicamente para registrar tu participación. No se compartirá con terceros."/>
 
       <button type="submit" className="btn-form">Iniciar test <CaretRight size={16} weight="bold"/></button>
       <button type="button" className="btn-back" onClick={onBack} style={{marginTop:10}}>
@@ -192,21 +196,43 @@ function ProgressBar({ current, total }) {
 }
 
 /* ── QUESTION CARD ────────────────────────────────────────── */
+const LIKERT_LABELS = { 1:'En desacuerdo', 2:'Poco de acuerdo', 3:'Neutral', 4:'De acuerdo', 5:'Muy de acuerdo' };
+
 function QuestionCard({ question, value, onChange, index }) {
-  return <div className={`question-card fade-in${value?' answered':''}`} style={{animationDelay:`${index*0.06}s`}}>
-    <p className="question-text">{question.text}</p>
-    <div className="likert-buttons">
-      {[1,2,3,4,5].map(v=>(
-        <button key={v} className={`likert-btn${value===v?' selected':''}`}
-          onClick={()=>onChange(question.id,v)}>{v}</button>
-      ))}
-    </div>
-    <div className="likert-labels">
-      <span className="likert-label">En desacuerdo</span>
-      <span className="likert-label">Muy de acuerdo</span>
-    </div>
-    {value && <div className="answer-progress-line" style={{background:'var(--color-primary)',width:`${value*20}%`}}/>}
-  </div>;
+  return (
+    <fieldset
+      className={`question-card fade-in${value ? ' answered' : ''}`}
+      style={{ animationDelay: `${index * 0.06}s` }}
+    >
+      {/* legend is visually hidden but read by screen readers */}
+      <legend className="sr-only">{question.text}</legend>
+      <p className="question-text" aria-hidden="true">{question.text}</p>
+      <div className="likert-buttons">
+        {[1,2,3,4,5].map(v => (
+          <button
+            key={v}
+            type="button"
+            className={`likert-btn${value === v ? ' selected' : ''}`}
+            onClick={() => onChange(question.id, v)}
+            aria-label={`${v} – ${LIKERT_LABELS[v]}`}
+            aria-pressed={value === v}
+          >
+            {v}
+          </button>
+        ))}
+      </div>
+      <div className="likert-labels">
+        <span className="likert-label">En desacuerdo</span>
+        <span className="likert-label">Muy de acuerdo</span>
+      </div>
+      {value && (
+        <p className="likert-selected-label" aria-live="polite">
+          Seleccionado: <strong>{LIKERT_LABELS[value]}</strong>
+        </p>
+      )}
+      {value && <div className="answer-progress-line" style={{ background: 'var(--color-primary)', width: `${value * 20}%` }} />}
+    </fieldset>
+  );
 }
 
 /* ── TEST SCREEN ──────────────────────────────────────────── */
@@ -270,7 +296,6 @@ function ResultsScreen({ result, userData, onRestart }) {
   const entries = Object.entries(profile).sort((a,b)=>b[1]-a[1]);
 
   return <div>
-    <AnimatedBg/>
     <div className="confetti-burst">
       {Array.from({length:28},(_,i)=>(
         <div key={i} className="confetti-piece" style={{
@@ -387,23 +412,63 @@ function ResultsScreen({ result, userData, onRestart }) {
         <span className="region-sub"> · {userData.ciudad}, {userData.departamento}</span>
       </div>
 
-      <button className="btn-restart fade-in d6" onClick={onRestart}>
+      <button className="btn-download fade-in d6 no-print" onClick={()=>window.print()}>
+        <ListChecks size={16} weight="bold"/> Descargar resultado
+      </button>
+      <button className="btn-restart fade-in d6 no-print" onClick={()=>{
+        if(window.confirm('¿Seguro que quieres empezar de nuevo? Perderás los resultados actuales.')) onRestart();
+      }}>
         <ArrowCounterClockwise size={16} weight="bold"/> Volver a empezar
       </button>
     </div>
   </div>;
 }
 
-/* ── MAIN APP ─────────────────────────────────────────────── */
+/* -- MAIN APP ------------------------------------------------------------ */
+const STORAGE_KEY = 'test_vocacional_progress';
+
 export default function App() {
-  const [stage, setStage] = useState('welcome');
-  const [userData, setUserData] = useState(null);
-  const [sections, setSections] = useState([]);
+  const [stage, setStage]           = useState('welcome');
+  const [userData, setUserData]     = useState(null);
+  const [sections, setSections]     = useState([]);
   const [sectionIdx, setSectionIdx] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState(null);
+  const [answers, setAnswers]       = useState({});
+  const [result, setResult]         = useState(null);
+  const [showResume, setShowResume] = useState(false);
+
+  // Detectar progreso guardado al montar
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.stage === 'test' && parsed.userData) setShowResume(true);
+      }
+    } catch { /* ignore */ }
+  }, []);
+
+  // Persistir progreso en cada cambio durante el test
+  useEffect(() => {
+    if (stage === 'test') {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ stage, userData, sectionIdx, answers }));
+      } catch { /* ignore */ }
+    }
+  }, [stage, userData, sectionIdx, answers]);
 
   const setAnswer = useCallback((id, val) => setAnswers(p=>({...p,[id]:val})), []);
+
+  const handleResume = useCallback(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      setUserData(saved.userData);
+      setSections(buildSections(saved.userData.region, saved.userData.nivel));
+      setSectionIdx(saved.sectionIdx || 0);
+      setAnswers(saved.answers || {});
+      setStage('test');
+    } catch { setStage('welcome'); }
+    setShowResume(false);
+  }, []);
 
   const handleFormSubmit = useCallback((data) => {
     setUserData(data);
@@ -418,15 +483,16 @@ export default function App() {
       setSectionIdx(s => s+1);
       window.scrollTo({top:0, behavior:'smooth'});
     } else {
-      const profile = getLikertProfile(answers);
-      const viability = getVirtualViability(answers);
-      const academia = getAcademiaScore(answers);
+      const profile     = getLikertProfile(answers);
+      const viability   = getVirtualViability(answers);
+      const academia    = getAcademiaScore(answers);
       const proyectoSum = ['p01','p02','p03','p04','p05'].reduce((s,k)=>s+(answers[k]||3),0);
-      const risk = getRisk(viability, academia, proyectoSum);
+      const risk        = getRisk(viability, academia, proyectoSum);
       const { dominant, secondary } = getDominantProfile(profile);
-      const tipo = getTipoBusqueda(userData.busqueda);
-      const programs = getProgramas(dominant, tipo, userData.region);
+      const tipo        = getTipoBusqueda(userData.busqueda);
+      const programs    = getProgramas(dominant, tipo, userData.region);
       setResult({ profile, viability, academia, risk, dominant, secondary, programs, tipo });
+      localStorage.removeItem(STORAGE_KEY);
       setStage('result');
       window.scrollTo({top:0, behavior:'smooth'});
     }
@@ -437,6 +503,7 @@ export default function App() {
   }, [sectionIdx]);
 
   const handleRestart = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY);
     setStage('welcome'); setUserData(null); setSections([]);
     setSectionIdx(0); setAnswers({}); setResult(null);
     window.scrollTo({top:0, behavior:'smooth'});
@@ -445,6 +512,19 @@ export default function App() {
   return <div>
     <Header/>
     <AnimatedBg/>
+
+    {showResume && (
+      <div className="resume-banner fade-in">
+        <p className="resume-text">Tienes un test en progreso. Deseas continuar donde lo dejaste?</p>
+        <div className="resume-actions">
+          <button className="resume-btn-yes" onClick={handleResume}>Si, continuar</button>
+          <button className="resume-btn-no" onClick={()=>{ localStorage.removeItem(STORAGE_KEY); setShowResume(false); }}>
+            Empezar de nuevo
+          </button>
+        </div>
+      </div>
+    )}
+
     {stage==='welcome' && <WelcomeScreen onStart={()=>setStage('form')}/>}
     {stage==='form'    && <FormScreen onSubmit={handleFormSubmit} onBack={()=>setStage('welcome')}/>}
     {stage==='test'    && <TestScreen sections={sections} sectionIdx={sectionIdx} answers={answers}
