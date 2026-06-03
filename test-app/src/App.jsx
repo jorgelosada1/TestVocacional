@@ -3,7 +3,7 @@ import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler,
 import { Radar } from 'react-chartjs-2';
 import {
   REGIONES, NIVELES_EDUCATIVOS, SITUACIONES, BUSQUEDAS,
-  PROFILE_LABELS, PROFILE_FORTALEZAS, ORIENTACION_PERFIL, NOTA_NIVEL, getProgramas, getTipoBusqueda,
+  PROFILE_LABELS, PROFILE_FORTALEZAS, ORIENTACION_PERFIL, NOTA_NIVEL, rankProgramas, getTipoBusqueda,
   getLikertProfile, getVirtualViability, getAcademiaScore, getRisk,
   getDominantProfile, buildSections,
 } from './data';
@@ -389,10 +389,13 @@ function ResultsScreen({ result, userData, onRestart }) {
         {programs.map((p,i)=>(
           <div className={`program-item${i===0?' program-top':''}`} key={i}>
             <div className={`program-number${i===0?' program-number-top':''}`}>{i===0?'★':i+1}</div>
-            <span className="program-name">{p}</span>
-            <span className={`program-badge ${result.tipo}`}>
-              {result.tipo === 'posgrado' ? 'Posgrado' : 'Pregrado'}
-            </span>
+            <div className="program-info">
+              <span className="program-name">{p.nombre}</span>
+              <div className="program-match-bar">
+                <div className="program-match-fill" style={{width:`${p.matchPct}%`}}/>
+              </div>
+            </div>
+            <span className="program-match-pct">{p.matchPct}%</span>
           </div>
         ))}
       </div>
@@ -490,7 +493,7 @@ export default function App() {
       const risk        = getRisk(viability, academia, proyectoSum);
       const { dominant, secondary } = getDominantProfile(profile);
       const tipo        = getTipoBusqueda(userData.busqueda);
-      const programs    = getProgramas(dominant, tipo, userData.region);
+      const programs    = rankProgramas(profile, tipo, userData.region);
       setResult({ profile, viability, academia, risk, dominant, secondary, programs, tipo });
       localStorage.removeItem(STORAGE_KEY);
       setStage('result');

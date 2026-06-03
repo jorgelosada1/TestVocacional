@@ -383,13 +383,20 @@ fieldset.question-card {
   background: linear-gradient(135deg, #F5A623, #FFD17A) !important;
   font-size: 13px;
 }
-.program-name { font-size: 13px; font-weight: 500; color: var(--color-text); flex: 1; }
-.program-badge {
-  font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
-  text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+.program-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.program-name { font-size: 13px; font-weight: 500; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.program-match-bar {
+  height: 5px; background: #E8EDF3; border-radius: 3px; overflow: hidden;
 }
-.program-badge.pregrado { background: #E8F4FD; color: var(--color-primary); }
-.program-badge.posgrado { background: #FFF3E0; color: #C78B18; }
+.program-match-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-light-blue));
+  transition: width 1s ease-out;
+}
+.program-match-pct {
+  font-size: 12px; font-weight: 700; color: var(--color-primary);
+  flex-shrink: 0; min-width: 36px; text-align: right;
+}
 
 /* ============ FORTALEZAS ============ */
 .fortalezas-card {
@@ -414,25 +421,7 @@ fieldset.question-card {
 }
 .region-sub { font-weight: 400; color: #9A8060; }
 .secondary-label { font-size: 12px; color: #8A99AA; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
-.program-item {
-  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
-  border-radius: 14px; margin-bottom: 6px; background: var(--color-bg);
-  transition: all 0.25s; border: 1px solid transparent;
-}
-.program-item:hover { background: #E8F4FD; border-color: rgba(77,172,232,0.3); transform: translateX(4px); }
-.program-number {
-  width: 26px; height: 26px; border-radius: 8px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-light-blue));
-  color: white; font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.program-name { font-size: 13px; font-weight: 500; color: var(--color-text); flex: 1; }
-.program-badge {
-  font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
-  text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
-}
-.program-badge.pregrado { background: #E8F4FD; color: var(--color-primary); }
-.program-badge.posgrado { background: #FFF3E0; color: #C78B18; }
+/* (program styles are defined above) */
 
 /* Suggestion */
 .suggestion-card {

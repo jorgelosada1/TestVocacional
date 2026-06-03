@@ -2,20 +2,14 @@
 // DATA – Test Vocacional Territorial · Innovación E-Learning
 // ============================================================
 
-// ─── REGIONES ───────────────────────────────────────────────
 export const REGIONES = ['Bogotá', 'Boyacá', 'Buenaventura', 'San Gil', 'Leticia', 'Aguachica'];
-
 export const NIVELES_EDUCATIVOS = ['Colegio', 'Técnico/Tecnólogo', 'Profesional'];
-
 export const SITUACIONES = ['Estudio', 'Trabajo', 'Estudio y trabajo', 'Ninguno'];
-
 export const BUSQUEDAS = ['Carrera técnica', 'Tecnología', 'Pregrado profesional', 'Posgrado', 'Cursos/certificaciones'];
 
-// ─── BLOQUE A – INTERESES VOCACIONALES (12) ─────────────────
+// ─── BLOQUE DE INTERESES ─────────────────────────────────────
 export const BLOQUE_INTERESES = {
-  id: 'intereses',
   title: 'Intereses vocacionales',
-  description: 'Indica qué tan de acuerdo estás con cada afirmación (1 = muy en desacuerdo, 5 = muy de acuerdo)',
   questions: [
     { id: 'i01', text: 'Me interesa estudiar algo que me permita conseguir empleo rápidamente.' },
     { id: 'i02', text: 'Me atraen los programas relacionados con tecnología y herramientas digitales.' },
@@ -32,11 +26,9 @@ export const BLOQUE_INTERESES = {
   ],
 };
 
-// ─── BLOQUE B – VIRTUALIDAD (6) ─────────────────────────────
+// ─── BLOQUE DE VIRTUALIDAD ───────────────────────────────────
 export const BLOQUE_VIRTUALIDAD = {
-  id: 'virtualidad',
-  title: 'Condiciones para estudiar virtualmente',
-  description: '¿Qué tan bien describe tu situación actual?',
+  title: 'Condiciones para la virtualidad',
   questions: [
     { id: 'v01', text: 'Tengo acceso frecuente a internet.' },
     { id: 'v02', text: 'Tengo un dispositivo adecuado para estudiar (celular, tablet o computador).' },
@@ -47,11 +39,9 @@ export const BLOQUE_VIRTUALIDAD = {
   ],
 };
 
-// ─── BLOQUE C – AUTOEFICACIA (5) ────────────────────────────
+// ─── BLOQUE DE AUTOEFICACIA ──────────────────────────────────
 export const BLOQUE_AUTOEFICACIA = {
-  id: 'autoeficacia',
   title: 'Autoeficacia académica',
-  description: '¿Cómo te describes a ti mismo/a?',
   questions: [
     { id: 'a01', text: 'Comprendo fácilmente textos o instrucciones.' },
     { id: 'a02', text: 'Puedo expresar mis ideas por escrito claramente.' },
@@ -61,11 +51,9 @@ export const BLOQUE_AUTOEFICACIA = {
   ],
 };
 
-// ─── BLOQUE D – PROYECTO DE VIDA (5) ────────────────────────
+// ─── BLOQUE DE PROYECTO DE VIDA ──────────────────────────────
 export const BLOQUE_PROYECTO = {
-  id: 'proyecto',
   title: 'Proyecto de vida',
-  description: '¿Qué motiva tu decisión de estudiar?',
   questions: [
     { id: 'p01', text: 'Estudiar es importante para mejorar mis ingresos.' },
     { id: 'p02', text: 'Quiero crecer profesionalmente.' },
@@ -75,12 +63,10 @@ export const BLOQUE_PROYECTO = {
   ],
 };
 
-// ─── BLOQUES TERRITORIALES (3 preguntas c/u) ────────────────
+// ─── BLOQUES TERRITORIALES ───────────────────────────────────
 export const BLOQUES_TERRITORIALES = {
   Bogotá: {
-    id: 'territorial',
-    title: 'Pertinencia territorial – Bogotá',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – Bogotá',
     questions: [
       { id: 't01', text: 'Me interesan programas con alta demanda laboral en el mercado bogotano.' },
       { id: 't02', text: 'Quiero acceder a formación con reconocimiento nacional e internacional.' },
@@ -88,9 +74,7 @@ export const BLOQUES_TERRITORIALES = {
     ],
   },
   Boyacá: {
-    id: 'territorial',
-    title: 'Pertinencia territorial – Boyacá',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – Boyacá',
     questions: [
       { id: 't01', text: 'Me interesan programas relacionados con agro, turismo o tecnología aplicada al territorio boyacense.' },
       { id: 't02', text: 'Quiero estudiar sin tener que irme de mi municipio.' },
@@ -98,9 +82,7 @@ export const BLOQUES_TERRITORIALES = {
     ],
   },
   Buenaventura: {
-    id: 'territorial',
-    title: 'Pertinencia territorial – Buenaventura',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – Buenaventura',
     questions: [
       { id: 't01', text: 'Me interesan programas relacionados con logística, comercio o servicios portuarios.' },
       { id: 't02', text: 'Las dificultades de conectividad podrían afectar mis estudios virtuales.' },
@@ -108,9 +90,7 @@ export const BLOQUES_TERRITORIALES = {
     ],
   },
   'San Gil': {
-    id: 'territorial',
-    title: 'Pertinencia territorial – San Gil',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – San Gil',
     questions: [
       { id: 't01', text: 'Me interesan programas relacionados con turismo, hospitalidad o emprendimiento.' },
       { id: 't02', text: 'Me gustaría usar herramientas digitales para promocionar negocios.' },
@@ -118,9 +98,7 @@ export const BLOQUES_TERRITORIALES = {
     ],
   },
   Leticia: {
-    id: 'territorial',
-    title: 'Pertinencia territorial – Leticia',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – Leticia',
     questions: [
       { id: 't01', text: 'Me interesan programas relacionados con sostenibilidad, cultura o trabajo comunitario.' },
       { id: 't02', text: 'Necesito contenidos que funcionen incluso con conectividad limitada.' },
@@ -128,9 +106,7 @@ export const BLOQUES_TERRITORIALES = {
     ],
   },
   Aguachica: {
-    id: 'territorial',
-    title: 'Pertinencia territorial – Aguachica',
-    description: 'Preguntas relacionadas con tu región',
+    title: 'Contexto territorial – Aguachica',
     questions: [
       { id: 't01', text: 'Me interesan programas relacionados con comercio, agro o servicios.' },
       { id: 't02', text: 'Necesito horarios flexibles porque trabajo o tengo responsabilidades.' },
@@ -139,12 +115,10 @@ export const BLOQUES_TERRITORIALES = {
   },
 };
 
-// ─── BLOQUES POR PERFIL EDUCATIVO (5 preguntas c/u) ─────────
+// ─── BLOQUES DE PERFIL ───────────────────────────────────────
 export const BLOQUES_PERFIL = {
   Colegio: {
-    id: 'perfil_educativo',
-    title: 'Descubrimiento personal',
-    description: 'Cuéntanos un poco más sobre ti y tus intereses',
+    title: 'Perfil – Colegio',
     questions: [
       { id: 'pe1', text: 'Me gusta participar en actividades creativas o culturales.' },
       { id: 'pe2', text: 'Disfruto trabajar en equipo hacia un objetivo común.' },
@@ -154,9 +128,7 @@ export const BLOQUES_PERFIL = {
     ],
   },
   'Técnico/Tecnólogo': {
-    id: 'perfil_educativo',
-    title: 'Continuidad profesional',
-    description: 'Sobre tu trayectoria y lo que buscas ahora',
+    title: 'Perfil – Técnico/Tecnólogo',
     questions: [
       { id: 'pe1', text: 'Quiero continuar mi formación para acceder a mejores oportunidades laborales.' },
       { id: 'pe2', text: 'Me interesa homologar mis estudios previos en un programa profesional.' },
@@ -166,9 +138,7 @@ export const BLOQUES_PERFIL = {
     ],
   },
   Profesional: {
-    id: 'perfil_educativo',
-    title: 'Proyección y especialización',
-    description: 'Sobre tu crecimiento y metas profesionales',
+    title: 'Perfil – Profesional',
     questions: [
       { id: 'pe1', text: 'Quiero especializarme en un área específica de mi campo.' },
       { id: 'pe2', text: 'Me interesa crecer hacia cargos directivos o de alta gerencia.' },
@@ -179,7 +149,7 @@ export const BLOQUES_PERFIL = {
   },
 };
 
-// ─── PERFIL LABELS ───────────────────────────────────────────
+// ─── ETIQUETAS Y FORTALEZAS DE PERFIL ────────────────────────
 export const PROFILE_LABELS = {
   tecnologico:    'Tecnológico-digital',
   social:         'Social-comunitario',
@@ -198,9 +168,7 @@ export const PROFILE_FORTALEZAS = {
   creativo:       ['Creatividad', 'Comunicación visual', 'Pensamiento innovador'],
 };
 
-// ─── ORIENTACIÓN POR PERFIL VOCACIONAL ───────────────────────
-// Mensaje principal basado en el perfil dominante. Reemplaza el anterior
-// "MENSAJES_PERFIL" que era solo por nivel educativo, no por vocación.
+// ─── ORIENTACIÓN POR PERFIL ──────────────────────────────────
 export const ORIENTACION_PERFIL = {
   tecnologico:
     'Tu perfil muestra una fuerte afinidad hacia la tecnología, el análisis y la solución de problemas complejos. Los programas de ingeniería de sistemas y software, junto con especializaciones en inteligencia artificial y analítica de datos, son los que mejor se alinean con tus habilidades. En la era digital, este perfil tiene alta demanda laboral y oportunidades de crecimiento acelerado.',
@@ -216,7 +184,7 @@ export const ORIENTACION_PERFIL = {
     'Tu creatividad y capacidad comunicativa son activos valiosos en el mercado actual. Los programas de comunicación, mercadeo y producción de contenido te permiten combinar expresión con impacto profesional. El marketing digital y la dirección de contenidos son áreas con crecimiento exponencial.',
 };
 
-// ─── NOTA COMPLEMENTARIA POR NIVEL EDUCATIVO ─────────────────
+// ─── NOTA POR NIVEL EDUCATIVO ────────────────────────────────
 export const NOTA_NIVEL = {
   Colegio:
     'Estás en un momento clave de exploración. No necesitas decidir todo ahora; el proceso formativo incluye orientación y acompañamiento tutorial.',
@@ -226,135 +194,118 @@ export const NOTA_NIVEL = {
     'Tu trayectoria te posiciona para dar el salto a la especialización o maestría. Prioriza programas con aplicación estratégica inmediata en tu sector.',
 };
 
-// ─── PROGRAMAS POR PERFIL VOCACIONAL ─────────────────────────
+// ─── CATÁLOGO DE PROGRAMAS CON AFINIDAD VOCACIONAL ───────────
+// Cada programa tiene un vector de afinidad (0-5) para los 6 perfiles.
+// El score se calcula como producto punto: Σ(perfil_usuario[k] × afinidad[k])
 // Catálogo: Universidad Areandina y Universidad Iberoamericana de Colombia.
-// Recomendación PRIMARIA: según perfil dominante, no por región.
-export const PROGRAMAS_POR_PERFIL = {
-  tecnologico: {
-    pregrado: [
-      'Ingeniería de Software',
-      'Ingeniería de Sistemas',
-      'Ingeniería Industrial',
-      'Economía',
-      'Administración Financiera',
-    ],
-    posgrado: [
-      'Especialización en Inteligencia Artificial',
-      'Especialización en Ciberseguridad',
-      'Maestría en Analítica de Datos',
-      'Especialización en Analítica y Big Data',
-      'Maestría en Inteligencia de Negocios',
-    ],
-  },
-  social: {
-    pregrado: [
-      'Trabajo Social',
-      'Psicología',
-      'Licenciatura en Educación Infantil',
-      'Licenciatura en Educación Especial',
-      'Licenciatura en Ciencias Sociales',
-    ],
-    posgrado: [
-      'Maestría en Educación',
-      'Especialización en Desarrollo Integral de la Infancia y la Adolescencia',
-      'Especialización en Neuropsicología de la Educación',
-      'Especialización en Pedagogía y Docencia',
-      'Maestría en Epidemiología',
-    ],
-  },
-  emprendedor: {
-    pregrado: [
-      'Administración de Empresas',
-      'Mercadeo y Publicidad',
-      'Marketing de Negocios',
-      'Negocios Internacionales',
-      'Administración Financiera',
-    ],
-    posgrado: [
-      'Maestría en Administración de Empresas MBA',
-      'Especialización en Gerencia de Proyectos',
-      'Especialización en Marketing Digital',
-      'Maestría en Gerencia de Mercadeo Digital',
-      'Especialización en Alta Gerencia',
-    ],
-  },
-  administrativo: {
-    pregrado: [
-      'Administración de Empresas',
-      'Contaduría Pública',
-      'Administración Financiera',
-      'Tecnología Gestión Talento Humano',
-      'Administración Pública',
-    ],
-    posgrado: [
-      'Especialización en Gerencia Financiera',
-      'Especialización en Talento Humano',
-      'Especialización en Revisoría Fiscal y Auditoría Forense',
-      'Maestría en Gestión del Talento Humano',
-      'Especialización en Alta Gerencia',
-    ],
-  },
-  servicios: {
-    pregrado: [
-      'Administración en Salud',
-      'Seguridad y Salud en el Trabajo',
-      'Tecnología Logística',
-      'Comunicación Social',
-      'Negocios Internacionales',
-    ],
-    posgrado: [
-      'Especialización en Gestión de la Salud Pública',
-      'Especialización en Gestión de Procesos Logísticos y Redes de Valor',
-      'Especialización en Auditoría en Salud',
-      'Especialización en Gerencia de la Seguridad y Salud en el Trabajo',
-      'Especialización en Inteligencia de Negocios',
-    ],
-  },
-  creativo: {
-    pregrado: [
-      'Comunicación Social',
-      'Mercadeo y Publicidad',
-      'Marketing de Negocios',
-      'Psicología',
-      'Sociología',
-    ],
-    posgrado: [
-      'Especialización en Dirección y Producción de Contenido Audiovisual',
-      'Especialización en Marketing Digital',
-      'Maestría en Gerencia de Mercadeo Digital',
-      'Especialización en Derechos de Autor y Propiedad Industrial',
-      'Especialización en Informática e Innovación Educativa',
-    ],
-  },
+
+export const CATALOGO_PREGRADO = [
+  { nombre: 'Ingeniería de Software',                   afinidad: { tec:5, soc:0, emp:1, adm:0, srv:0, cre:2 } },
+  { nombre: 'Ingeniería de Sistemas',                   afinidad: { tec:5, soc:0, emp:1, adm:1, srv:0, cre:0 } },
+  { nombre: 'Ingeniería Industrial',                    afinidad: { tec:3, soc:0, emp:2, adm:4, srv:1, cre:0 } },
+  { nombre: 'Economía',                                 afinidad: { tec:2, soc:1, emp:3, adm:3, srv:0, cre:0 } },
+  { nombre: 'Administración Financiera',                afinidad: { tec:1, soc:0, emp:3, adm:5, srv:0, cre:0 } },
+  { nombre: 'Trabajo Social',                           afinidad: { tec:0, soc:5, emp:0, adm:1, srv:2, cre:0 } },
+  { nombre: 'Psicología',                               afinidad: { tec:0, soc:4, emp:0, adm:0, srv:2, cre:3 } },
+  { nombre: 'Licenciatura en Educación Infantil',       afinidad: { tec:0, soc:5, emp:0, adm:1, srv:1, cre:2 } },
+  { nombre: 'Licenciatura en Educación Especial',       afinidad: { tec:0, soc:5, emp:0, adm:1, srv:2, cre:1 } },
+  { nombre: 'Licenciatura en Ciencias Sociales',        afinidad: { tec:0, soc:4, emp:0, adm:1, srv:1, cre:2 } },
+  { nombre: 'Administración de Empresas',               afinidad: { tec:0, soc:0, emp:5, adm:4, srv:1, cre:0 } },
+  { nombre: 'Mercadeo y Publicidad',                    afinidad: { tec:1, soc:0, emp:3, adm:1, srv:1, cre:5 } },
+  { nombre: 'Marketing de Negocios',                    afinidad: { tec:1, soc:0, emp:4, adm:2, srv:1, cre:3 } },
+  { nombre: 'Negocios Internacionales',                 afinidad: { tec:1, soc:1, emp:5, adm:3, srv:1, cre:0 } },
+  { nombre: 'Contaduría Pública',                       afinidad: { tec:1, soc:0, emp:1, adm:5, srv:0, cre:0 } },
+  { nombre: 'Tecnología en Gestión del Talento Humano', afinidad: { tec:0, soc:2, emp:1, adm:4, srv:2, cre:0 } },
+  { nombre: 'Administración Pública',                   afinidad: { tec:0, soc:3, emp:1, adm:4, srv:2, cre:0 } },
+  { nombre: 'Administración en Salud',                  afinidad: { tec:0, soc:2, emp:1, adm:3, srv:5, cre:0 } },
+  { nombre: 'Seguridad y Salud en el Trabajo',          afinidad: { tec:1, soc:1, emp:0, adm:3, srv:5, cre:0 } },
+  { nombre: 'Tecnología en Logística',                  afinidad: { tec:2, soc:0, emp:2, adm:4, srv:3, cre:0 } },
+  { nombre: 'Comunicación Social',                      afinidad: { tec:1, soc:2, emp:1, adm:0, srv:1, cre:5 } },
+  { nombre: 'Sociología',                               afinidad: { tec:0, soc:4, emp:0, adm:1, srv:1, cre:3 } },
+  { nombre: 'Tecnología en Producción Ganadera Sostenible', afinidad: { tec:1, soc:2, emp:2, adm:1, srv:2, cre:0 } },
+  { nombre: 'Licenciatura en Educación Bilingüe',       afinidad: { tec:0, soc:3, emp:0, adm:0, srv:2, cre:3 } },
+];
+
+export const CATALOGO_POSGRADO = [
+  { nombre: 'Especialización en Inteligencia Artificial',                        afinidad: { tec:5, soc:0, emp:2, adm:0, srv:0, cre:1 } },
+  { nombre: 'Especialización en Ciberseguridad',                                 afinidad: { tec:5, soc:0, emp:1, adm:2, srv:0, cre:0 } },
+  { nombre: 'Maestría en Analítica de Datos',                                    afinidad: { tec:5, soc:0, emp:2, adm:2, srv:0, cre:0 } },
+  { nombre: 'Especialización en Analítica y Big Data',                           afinidad: { tec:5, soc:0, emp:1, adm:2, srv:0, cre:0 } },
+  { nombre: 'Maestría en Inteligencia de Negocios',                              afinidad: { tec:4, soc:0, emp:3, adm:3, srv:0, cre:0 } },
+  { nombre: 'Maestría en Educación',                                             afinidad: { tec:0, soc:5, emp:0, adm:1, srv:1, cre:2 } },
+  { nombre: 'Especialización en Desarrollo Integral de la Infancia y la Adolescencia', afinidad: { tec:0, soc:5, emp:0, adm:1, srv:2, cre:1 } },
+  { nombre: 'Especialización en Neuropsicología de la Educación',                afinidad: { tec:1, soc:4, emp:0, adm:0, srv:2, cre:1 } },
+  { nombre: 'Especialización en Pedagogía y Docencia',                           afinidad: { tec:0, soc:4, emp:0, adm:1, srv:2, cre:2 } },
+  { nombre: 'Maestría en Epidemiología',                                         afinidad: { tec:2, soc:3, emp:0, adm:1, srv:4, cre:0 } },
+  { nombre: 'Maestría en Administración de Empresas MBA',                        afinidad: { tec:1, soc:0, emp:5, adm:4, srv:0, cre:0 } },
+  { nombre: 'Especialización en Gerencia de Proyectos',                          afinidad: { tec:2, soc:0, emp:4, adm:3, srv:1, cre:0 } },
+  { nombre: 'Especialización en Marketing Digital',                              afinidad: { tec:2, soc:0, emp:3, adm:1, srv:0, cre:5 } },
+  { nombre: 'Maestría en Gerencia de Mercadeo Digital',                          afinidad: { tec:2, soc:0, emp:4, adm:2, srv:0, cre:4 } },
+  { nombre: 'Especialización en Alta Gerencia',                                  afinidad: { tec:0, soc:0, emp:4, adm:5, srv:0, cre:0 } },
+  { nombre: 'Especialización en Gerencia Financiera',                            afinidad: { tec:1, soc:0, emp:2, adm:5, srv:0, cre:0 } },
+  { nombre: 'Especialización en Talento Humano',                                 afinidad: { tec:0, soc:3, emp:1, adm:4, srv:1, cre:0 } },
+  { nombre: 'Especialización en Revisoría Fiscal y Auditoría Forense',           afinidad: { tec:1, soc:0, emp:0, adm:5, srv:0, cre:0 } },
+  { nombre: 'Maestría en Gestión del Talento Humano',                            afinidad: { tec:0, soc:3, emp:2, adm:4, srv:1, cre:0 } },
+  { nombre: 'Especialización en Gestión de la Salud Pública',                    afinidad: { tec:0, soc:3, emp:1, adm:2, srv:5, cre:0 } },
+  { nombre: 'Especialización en Gestión de Procesos Logísticos y Redes de Valor', afinidad: { tec:2, soc:0, emp:2, adm:4, srv:3, cre:0 } },
+  { nombre: 'Especialización en Auditoría en Salud',                             afinidad: { tec:0, soc:1, emp:0, adm:3, srv:5, cre:0 } },
+  { nombre: 'Especialización en Gerencia de la Seguridad y Salud en el Trabajo', afinidad: { tec:1, soc:1, emp:1, adm:3, srv:5, cre:0 } },
+  { nombre: 'Especialización en Inteligencia de Negocios',                       afinidad: { tec:4, soc:0, emp:3, adm:3, srv:0, cre:0 } },
+  { nombre: 'Especialización en Dirección y Producción de Contenido Audiovisual', afinidad: { tec:2, soc:0, emp:2, adm:0, srv:0, cre:5 } },
+  { nombre: 'Especialización en Derechos de Autor y Propiedad Industrial',       afinidad: { tec:0, soc:1, emp:2, adm:3, srv:0, cre:4 } },
+  { nombre: 'Especialización en Informática e Innovación Educativa',             afinidad: { tec:3, soc:3, emp:1, adm:0, srv:1, cre:3 } },
+  { nombre: 'Especialización en Gestión Ambiental',                              afinidad: { tec:1, soc:3, emp:1, adm:2, srv:2, cre:0 } },
+  { nombre: 'Maestría en Innovación',                                            afinidad: { tec:3, soc:0, emp:4, adm:2, srv:0, cre:3 } },
+];
+
+// Bonus regional: programas con relevancia especial para la región (+0.5 al score)
+export const BONUS_REGIONAL = {
+  Bogotá:       ['Ingeniería de Software', 'Ingeniería Industrial', 'Administración de Empresas', 'Maestría en Administración de Empresas MBA', 'Maestría en Analítica de Datos', 'Especialización en Inteligencia Artificial'],
+  Boyacá:       ['Tecnología en Producción Ganadera Sostenible', 'Licenciatura en Ciencias Sociales', 'Trabajo Social', 'Maestría en Educación', 'Especialización en Gestión Ambiental', 'Administración Pública'],
+  Buenaventura: ['Negocios Internacionales', 'Tecnología en Logística', 'Administración en Salud', 'Especialización en Gestión de Procesos Logísticos y Redes de Valor', 'Especialización en Inteligencia de Negocios', 'Seguridad y Salud en el Trabajo'],
+  'San Gil':    ['Marketing de Negocios', 'Mercadeo y Publicidad', 'Administración de Empresas', 'Especialización en Marketing Digital', 'Especialización en Gerencia de Proyectos', 'Maestría en Gerencia de Mercadeo Digital'],
+  Leticia:      ['Trabajo Social', 'Licenciatura en Educación Infantil', 'Tecnología en Producción Ganadera Sostenible', 'Maestría en Educación', 'Especialización en Gestión Ambiental', 'Especialización en Desarrollo Integral de la Infancia y la Adolescencia'],
+  Aguachica:    ['Administración de Empresas', 'Contaduría Pública', 'Tecnología en Logística', 'Especialización en Gerencia Financiera', 'Especialización en Revisoría Fiscal y Auditoría Forense', 'Especialización en Alta Gerencia'],
 };
 
-// ─── AJUSTE REGIONAL ─────────────────────────────────────────
-// Reemplaza el 5° programa con uno relevante para la región.
-export const AJUSTE_REGIONAL = {
-  Bogotá:       { pregrado: 'Ingeniería Industrial',                                      posgrado: 'Maestría en Innovación' },
-  Boyacá:       { pregrado: 'Tecnología Producción Ganadería Sostenible',                 posgrado: 'Especialización en Gestión Ambiental' },
-  Buenaventura: { pregrado: 'Negocios Internacionales',                                   posgrado: 'Especialización en Gestión de Procesos Logísticos y Redes de Valor' },
-  'San Gil':    { pregrado: 'Marketing de Negocios',                                      posgrado: 'Especialización en Gerencia de Proyectos' },
-  Leticia:      { pregrado: 'Trabajo Social',                                             posgrado: 'Especialización en Gestión Ambiental' },
-  Aguachica:    { pregrado: 'Tecnología Logística',                                       posgrado: 'Especialización en Revisoría Fiscal' },
-};
-
-// Determina tipo según lo que el usuario busca
+// ─── FUNCIONES DE RANKING ────────────────────────────────────
 export function getTipoBusqueda(busqueda) {
   return busqueda === 'Posgrado' ? 'posgrado' : 'pregrado';
 }
 
-// Obtiene programas cruzando perfil dominante + tipo + ajuste regional
-export function getProgramas(dominant, tipo, region) {
-  const base = [...((PROGRAMAS_POR_PERFIL[dominant]?.[tipo]) || [])];
-  const extra = AJUSTE_REGIONAL[region]?.[tipo];
-  if (extra && !base.includes(extra)) {
-    base[4] = extra; // reemplaza el 5° por el relevante de la región
-  }
-  return base.slice(0, 5);
+// Rankea todos los programas del catálogo según afinidad con el perfil del usuario.
+// Retorna top 5 con nombre, score y porcentaje de match.
+export function rankProgramas(profile, tipo, region) {
+  const catalogo = tipo === 'posgrado' ? CATALOGO_POSGRADO : CATALOGO_PREGRADO;
+  const bonusList = BONUS_REGIONAL[region] || [];
+  const keys = ['tec', 'soc', 'emp', 'adm', 'srv', 'cre'];
+  const profileKeys = ['tecnologico', 'social', 'emprendedor', 'administrativo', 'servicios', 'creativo'];
+
+  const scored = catalogo.map(prog => {
+    // Producto punto: perfil_usuario × afinidad_programa
+    let score = 0;
+    let maxScore = 0;
+    keys.forEach((k, i) => {
+      score += (profile[profileKeys[i]] || 0) * (prog.afinidad[k] || 0);
+      maxScore += 5 * (prog.afinidad[k] || 0); // max si perfil fuera 5 en todo
+    });
+    // Bonus regional
+    if (bonusList.includes(prog.nombre)) score += 0.5;
+    const matchPct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    return { nombre: prog.nombre, score, matchPct };
+  });
+
+  // Ordenar por porcentaje descendente (y usar score como desempate)
+  scored.sort((a, b) => {
+    if (b.matchPct !== a.matchPct) {
+      return b.matchPct - a.matchPct;
+    }
+    return b.score - a.score;
+  });
+  return scored.slice(0, 5);
 }
 
-// ─── LÓGICA DE SCORING ───────────────────────────────────────
+// ─── FUNCIONES DE SCORING ────────────────────────────────────
 export function getLikertProfile(ans) {
   const v = (id) => ans[id] || 3;
   return {
@@ -363,7 +314,7 @@ export function getLikertProfile(ans) {
     emprendedor:    (v('i04') + v('i12')) / 2,
     administrativo: (v('i06') + v('i08')) / 2,
     servicios:      (v('i07') + v('i01')) / 2,
-    creativo:       v('i11'),          // solo i11: crear contenido/diseñar/expresar ideas
+    creativo:       v('i11'),
   };
 }
 
@@ -398,3 +349,4 @@ export function buildSections(region, nivelEducativo) {
     BLOQUES_PERFIL[nivelEducativo] || BLOQUES_PERFIL['Colegio'],
   ];
 }
+
