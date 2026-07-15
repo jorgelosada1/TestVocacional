@@ -40,7 +40,7 @@ export const FAMILIAS = {
 export const ESCALA_INTERESES = [
   { value: 1, label: 'Totalmente en desacuerdo' },
   { value: 2, label: 'En desacuerdo' },
-  { value: 3, label: 'Ni de acuerdo ni en desacuerdo' },
+  { value: 3, label: 'Neutral' },
   { value: 4, label: 'De acuerdo' },
   { value: 5, label: 'Totalmente de acuerdo' },
 ];
@@ -125,64 +125,62 @@ export const PREGUNTAS_CARACTERIZACION = [
 
 // ─── PANTALLA 4: INTERESES VOCACIONALES ─────────────────────
 export const PREGUNTAS_INTERESES = [
-  { id: 'int_1',  text: 'Me interesan los temas relacionados con tecnología y herramientas digitales.' },
-  { id: 'int_2',  text: 'Disfruto analizar información antes de tomar decisiones.' },
-  { id: 'int_3',  text: 'Me gusta ayudar, orientar o enseñar a otras personas.' },
-  { id: 'int_4',  text: 'Me interesa crear contenido, diseñar o expresar ideas de forma creativa.' },
-  { id: 'int_5',  text: 'Disfruto organizar personas, actividades o proyectos.' },
-  { id: 'int_6',  text: 'Me llaman la atención las ventas, los negocios y la negociación.' },
-  { id: 'int_7',  text: 'Me gustaría crear mi propia empresa o emprendimiento.' },
-  { id: 'int_8',  text: 'Me interesan los temas relacionados con el medio ambiente y la sostenibilidad.' },
-  { id: 'int_9',  text: 'Disfruto atender personas y ofrecer un buen servicio.' },
-  { id: 'int_10', text: 'Me gusta encontrar formas de mejorar procesos.' },
-  { id: 'int_11', text: 'Me interesa investigar y aprender constantemente.' },
-  { id: 'int_12', text: 'Me siento cómodo liderando equipos o iniciativas.' },
+  { id: 'int_1',  text: 'Me interesan los avances tecnológicos y las herramientas digitales.' },
+  { id: 'int_2',  text: 'Me llaman la atención los negocios, las empresas y el emprendimiento.' },
+  { id: 'int_3',  text: 'Me interesa comprender el comportamiento y las necesidades de las personas.' },
+  { id: 'int_4',  text: 'Me atraen los temas relacionados con el diseño, la comunicación y la creatividad.' },
+  { id: 'int_5',  text: 'Me interesa conocer cómo funcionan los procesos dentro de una organización.' },
+  { id: 'int_6',  text: 'Me llaman la atención las ventas, la negociación y el mercadeo.' },
+  { id: 'int_7',  text: 'Me interesa crear proyectos o ideas que generen impacto.' },
+  { id: 'int_8',  text: 'Me interesa el cuidado del medio ambiente y el desarrollo sostenible.' },
+  { id: 'int_9',  text: 'Me llaman la atención los temas relacionados con la salud y el bienestar.' },
+  { id: 'int_10', text: 'Me interesa analizar información para comprender mejor una situación.' },
+  { id: 'int_11', text: 'Disfruto aprender sobre temas nuevos por iniciativa propia.' },
+  { id: 'int_12', text: 'Me interesa conocer cómo funcionan las ciudades, las comunidades y la sociedad.' },
 ];
 
 // ─── PANTALLA 5: ACTIVIDADES QUE DISFRUTO ───────────────────
 export const PREGUNTAS_ACTIVIDADES = [
-  { id: 'act_1',  text: 'Resolver problemas utilizando la lógica o el análisis.' },
-  { id: 'act_2',  text: 'Organizar eventos, actividades o grupos de trabajo.' },
-  { id: 'act_3',  text: 'Explicar temas o enseñar algo que conozco.' },
-  { id: 'act_4',  text: 'Diseñar piezas gráficas, contenido digital o presentaciones.' },
-  { id: 'act_5',  text: 'Investigar información antes de tomar decisiones.' },
-  { id: 'act_6',  text: 'Hablar con personas para orientarlas o ayudarlas.' },
-  { id: 'act_7',  text: 'Negociar, vender o convencer a otras personas.' },
-  { id: 'act_8',  text: 'Crear ideas nuevas para resolver problemas.' },
-  { id: 'act_9',  text: 'Planear proyectos y hacer seguimiento hasta cumplir objetivos.' },
-  { id: 'act_10', text: 'Analizar datos, indicadores o resultados.' },
-  { id: 'act_11', text: 'Participar en actividades relacionadas con el cuidado del medio ambiente o el desarrollo sostenible.' },
-  { id: 'act_12', text: 'Atender personas y procurar que tengan una buena experiencia.' },
+  { id: 'act_1',  text: 'Resolver problemas complejos.' },
+  { id: 'act_2',  text: 'Organizar eventos, actividades o proyectos.' },
+  { id: 'act_3',  text: 'Explicar ideas o enseñar a otras personas.' },
+  { id: 'act_4',  text: 'Crear designs, ilustraciones o contenido creativo.' },
+  { id: 'act_5',  text: 'Investigar información para encontrar respuestas.' },
+  { id: 'act_6',  text: 'Escuchar y orientar a otras personas cuando lo necesitan.' },
+  { id: 'act_7',  text: 'Negociar o convencer a otras personas sobre una idea.' },
+  { id: 'act_8',  text: 'Construir o desarrollar soluciones nuevas.' },
+  { id: 'act_9',  text: 'Trabajar con números, indicadores o datos.' },
+  { id: 'act_10', text: 'Mejorar procesos para hacerlos más eficientes.' },
+  { id: 'act_11', text: 'Trabajar en espacios al aire libre o relacionados con la naturaleza.' },
+  { id: 'act_12', text: 'Hablar en público o presentar ideas frente a un grupo.' },
 ];
 
 // ─── PANTALLA 6: FORTALEZAS PERSONALES ──────────────────────
 export const PREGUNTAS_FORTALEZAS = [
-  { id: 'for_1',  text: 'Soy organizado(a) para planear y cumplir mis responsabilidades.',        competencia: 'Organización' },
-  { id: 'for_2',  text: 'Aprendo con facilidad cuando un tema despierta mi interés.',              competencia: 'Aprendizaje autónomo' },
-  { id: 'for_3',  text: 'Me adapto con facilidad a los cambios.',                                  competencia: 'Adaptabilidad' },
-  { id: 'for_4',  text: 'Me gusta trabajar en equipo para alcanzar objetivos.',                    competencia: 'Trabajo colaborativo' },
-  { id: 'for_5',  text: 'Me siento cómodo(a) liderando iniciativas o grupos.',                     competencia: 'Liderazgo' },
-  { id: 'for_6',  text: 'Mantengo la calma cuando debo resolver problemas difíciles.',              competencia: 'Resolución de problemas' },
-  { id: 'for_7',  text: 'Soy creativo(a) al proponer nuevas ideas.',                               competencia: 'Creatividad' },
-  { id: 'for_8',  text: 'Escucho con atención y respeto las opiniones de los demás.',               competencia: 'Comunicación interpersonal' },
-  { id: 'for_9',  text: 'Soy constante cuando me propongo alcanzar una meta.',                     competencia: 'Perseverancia' },
-  { id: 'for_10', text: 'Me esfuerzo por terminar lo que empiezo, incluso cuando aparecen dificultades.', competencia: 'Disciplina' },
-  { id: 'for_11', text: 'Me siento cómodo(a) utilizando herramientas digitales para aprender o trabajar.', competencia: 'Competencia digital' },
-  { id: 'for_12', text: 'Busco aprender cosas nuevas de manera permanente.',                       competencia: 'Curiosidad intelectual' },
+  { id: 'for_1',  text: 'Soy una persona disciplinada.', competencia: 'Disciplina' },
+  { id: 'for_2',  text: 'Aprendo con facilidad cuando algo me interesa.', competencia: 'Aprendizaje autónomo' },
+  { id: 'for_3',  text: 'Me adapto bien a los cambios.', competencia: 'Adaptabilidad' },
+  { id: 'for_4',  text: 'Trabajo bien en equipo.', competencia: 'Trabajo colaborativo' },
+  { id: 'for_5',  text: 'Las personas suelen confiar en mí para asumir responsabilidades.', competencia: 'Responsabilidad' },
+  { id: 'for_6',  text: 'Mantengo la calma cuando debo resolver problemas.', competencia: 'Resolución de problemas' },
+  { id: 'for_7',  text: 'Suelo aportar ideas originales.', competencia: 'Creatividad' },
+  { id: 'for_8',  text: 'Me comunico con claridad y respeto.', competencia: 'Comunicación' },
+  { id: 'for_9',  text: 'Soy perseverante cuando tengo un objetivo.', competencia: 'Perseverancia' },
+  { id: 'for_10', text: 'Presto atención a los detalles.', competencia: 'Atención a los detalles' },
+  { id: 'for_11', text: 'Me siento cómodo utilizando herramientas tecnológicas.', competencia: 'Competencia digital' },
+  { id: 'for_12', text: 'Tengo curiosidad por aprender constantemente.', competencia: 'Curiosidad intelectual' },
 ];
 
 // ─── PANTALLA 7: PREPARACIÓN EDUCACIÓN VIRTUAL ──────────────
 export const PREGUNTAS_VIRTUAL = [
-  { id: 'vir_1',  text: 'Organizo mi tiempo para cumplir con mis responsabilidades.',                         variable: 'Gestión del tiempo' },
-  { id: 'vir_2',  text: 'Cuando no entiendo un tema, busco información adicional por mi cuenta.',             variable: 'Aprendizaje autónomo' },
-  { id: 'vir_3',  text: 'Cumplo con mis tareas dentro de las fechas establecidas.',                           variable: 'Disciplina' },
-  { id: 'vir_4',  text: 'Me siento cómodo utilizando plataformas digitales para aprender.',                   variable: 'Competencia digital' },
-  { id: 'vir_5',  text: 'Cuando encuentro dificultades, procuro resolverlas antes de abandonar una actividad.', variable: 'Persistencia' },
-  { id: 'vir_6',  text: 'Puedo mantener la concentración durante una sesión de estudio sin distraerme fácilmente.', variable: 'Autorregulación' },
-  { id: 'vir_7',  text: 'Me gusta aprender cosas nuevas utilizando recursos como videos, cursos o lecturas en línea.', variable: 'Motivación por el aprendizaje' },
-  { id: 'vir_8',  text: 'Si tengo dudas, busco ayuda sin esperar a que alguien me la ofrezca.',               variable: 'Proactividad' },
-  { id: 'vir_9',  text: 'Tengo un espacio donde puedo estudiar con relativa tranquilidad.',                   variable: 'Condiciones de estudio' },
-  { id: 'vir_10', text: 'Creo que la modalidad virtual puede ayudarme a alcanzar mis metas académicas.',      variable: 'Disposición hacia la virtualidad' },
+  { id: 'vir_1',  text: 'Dispongo de un lugar adecuado para estudiar.', variable: 'Condiciones de estudio' },
+  { id: 'vir_2',  text: 'Tengo acceso estable a internet.', variable: 'Acceso a internet' },
+  { id: 'vir_3',  text: 'Cuento con un computador o dispositivo para estudiar.', variable: 'Equipamiento' },
+  { id: 'vir_4',  text: 'Me siento cómodo utilizando plataformas digitales.', variable: 'Competencia digital' },
+  { id: 'vir_5',  text: 'Puedo dedicar tiempo semanal a mis estudios.', variable: 'Disponibilidad de tiempo' },
+  { id: 'vir_6',  text: 'Cuando tengo dudas, busco soluciones antes de rendirme.', variable: 'Autonomía/Persistencia' },
+  { id: 'vir_7',  text: 'Me mantengo motivado aunque estudie de forma independiente.', variable: 'Motivación autónoma' },
+  { id: 'vir_8',  text: 'Cumplo con los compromisos sin necesidad de que alguien me lo recuerde.', variable: 'Autorregulación' },
 ];
 
 // ─── PANTALLA 8: MOTIVACIONES ───────────────────────────────
@@ -498,123 +496,117 @@ export const PREGUNTAS_NIVEL_EDUCATIVO = [
 export const MATRIZ_PONDERACION = {
   // ── BLOQUE 1: Intereses Vocacionales (peso del bloque: 40%) ──
   intereses: [
-    // P1: Tecnología y herramientas digitales
+    // P1: Me interesan los avances tecnológicos y las herramientas digitales.
     { pregunta: 'int_1',  familia: 'TEC', peso: 1.0 },
     { pregunta: 'int_1',  familia: 'PRO', peso: 0.4 },
-    // P2: Analizar información
-    { pregunta: 'int_2',  familia: 'TEC', peso: 0.7 },
-    { pregunta: 'int_2',  familia: 'NEG', peso: 0.3 },
-    { pregunta: 'int_2',  familia: 'PRO', peso: 0.8 },
-    // P3: Ayudar y enseñar
+    // P2: Me llaman la atención los negocios, las empresas y el emprendimiento.
+    { pregunta: 'int_2',  familia: 'NEG', peso: 0.8 },
+    { pregunta: 'int_2',  familia: 'EMP', peso: 1.0 },
+    { pregunta: 'int_2',  familia: 'COM', peso: 0.3 },
+    // P3: Me interesa comprender el comportamiento y las necesidades de las personas.
     { pregunta: 'int_3',  familia: 'SOC', peso: 1.0 },
-    { pregunta: 'int_3',  familia: 'AMB', peso: 0.2 },
-    // P4: Crear contenido o diseñar
+    { pregunta: 'int_3',  familia: 'COM', peso: 0.2 },
+    // P4: Me atraen los temas relacionados con el diseño, la comunicación y la creatividad.
     { pregunta: 'int_4',  familia: 'CRE', peso: 1.0 },
     { pregunta: 'int_4',  familia: 'COM', peso: 0.4 },
-    // P5: Organizar personas y proyectos
-    { pregunta: 'int_5',  familia: 'NEG', peso: 0.8 },
-    { pregunta: 'int_5',  familia: 'PRO', peso: 0.8 },
-    { pregunta: 'int_5',  familia: 'EMP', peso: 0.5 },
-    // P6: Ventas y negociación
-    { pregunta: 'int_6',  familia: 'NEG', peso: 0.5 },
+    // P5: Me interesa conocer cómo funcionan los procesos dentro de una organización.
+    { pregunta: 'int_5',  familia: 'PRO', peso: 1.0 },
+    { pregunta: 'int_5',  familia: 'NEG', peso: 0.6 },
+    // P6: Me llaman la atención las ventas, la negociación y el mercadeo.
     { pregunta: 'int_6',  familia: 'COM', peso: 1.0 },
+    { pregunta: 'int_6',  familia: 'NEG', peso: 0.5 },
     { pregunta: 'int_6',  familia: 'EMP', peso: 0.5 },
-    // P7: Crear empresa
-    { pregunta: 'int_7',  familia: 'NEG', peso: 0.5 },
-    { pregunta: 'int_7',  familia: 'COM', peso: 0.3 },
-    { pregunta: 'int_7',  familia: 'EMP', peso: 1.0 },
-    // P8: Medio ambiente
-    { pregunta: 'int_8',  familia: 'SOC', peso: 0.2 },
+    // P7: Me interesa crear proyectos o ideas que generen impacto.
+    { pregunta: 'int_7',  familia: 'EMP', peso: 0.8 },
+    { pregunta: 'int_7',  familia: 'SOC', peso: 0.4 },
+    { pregunta: 'int_7',  familia: 'NEG', peso: 0.4 },
+    // P8: Me interesa el cuidado del medio ambiente y el desarrollo sostenible.
     { pregunta: 'int_8',  familia: 'AMB', peso: 1.0 },
+    { pregunta: 'int_8',  familia: 'SOC', peso: 0.2 },
     { pregunta: 'int_8',  familia: 'PRO', peso: 0.3 },
-    // P9: Servicio al cliente
-    { pregunta: 'int_9',  familia: 'NEG', peso: 0.2 },
-    { pregunta: 'int_9',  familia: 'SOC', peso: 0.4 },
-    { pregunta: 'int_9',  familia: 'COM', peso: 1.0 },
-    // P10: Mejorar procesos
-    { pregunta: 'int_10', familia: 'TEC', peso: 0.5 },
-    { pregunta: 'int_10', familia: 'NEG', peso: 0.4 },
-    { pregunta: 'int_10', familia: 'PRO', peso: 1.0 },
-    { pregunta: 'int_10', familia: 'EMP', peso: 0.2 },
-    // P11: Investigar
+    // P9: Me llaman la atención los temas relacionados con la salud y el bienestar.
+    { pregunta: 'int_9',  familia: 'SOC', peso: 1.0 },
+    { pregunta: 'int_9',  familia: 'AMB', peso: 0.2 },
+    // P10: Me interesa analizar información para comprender mejor una situación.
+    { pregunta: 'int_10', familia: 'TEC', peso: 0.7 },
+    { pregunta: 'int_10', familia: 'NEG', peso: 0.3 },
+    { pregunta: 'int_10', familia: 'PRO', peso: 0.8 },
+    // P11: Disfruto aprender sobre temas nuevos por iniciativa propia.
     { pregunta: 'int_11', familia: 'TEC', peso: 0.6 },
     { pregunta: 'int_11', familia: 'NEG', peso: 0.2 },
     { pregunta: 'int_11', familia: 'SOC', peso: 0.3 },
     { pregunta: 'int_11', familia: 'AMB', peso: 0.3 },
     { pregunta: 'int_11', familia: 'PRO', peso: 0.4 },
-    // P12: Liderar equipos
-    { pregunta: 'int_12', familia: 'NEG', peso: 0.8 },
-    { pregunta: 'int_12', familia: 'SOC', peso: 0.2 },
-    { pregunta: 'int_12', familia: 'COM', peso: 0.2 },
-    { pregunta: 'int_12', familia: 'PRO', peso: 0.4 },
-    { pregunta: 'int_12', familia: 'EMP', peso: 0.8 },
+    // P12: Me interesa conocer cómo funcionan las ciudades, las comunidades y la sociedad.
+    { pregunta: 'int_12', familia: 'SOC', peso: 0.8 },
+    { pregunta: 'int_12', familia: 'AMB', peso: 0.4 },
+    { pregunta: 'int_12', familia: 'NEG', peso: 0.2 },
   ],
 
   // ── BLOQUE 2: Actividades que disfruto (peso del bloque: 40%) ──
   actividades: [
-    // P1: Resolver problemas
+    // P1: Resolver problemas complejos.
     { pregunta: 'act_1',  familia: 'TEC', peso: 1.0 },
     { pregunta: 'act_1',  familia: 'NEG', peso: 0.2 },
     { pregunta: 'act_1',  familia: 'PRO', peso: 0.8 },
-    // P2: Organizar actividades
+    // P2: Organizar eventos, actividades o proyectos.
     { pregunta: 'act_2',  familia: 'NEG', peso: 0.9 },
     { pregunta: 'act_2',  familia: 'SOC', peso: 0.2 },
     { pregunta: 'act_2',  familia: 'PRO', peso: 0.8 },
     { pregunta: 'act_2',  familia: 'EMP', peso: 0.4 },
-    // P3: Enseñar
+    // P3: Explicar ideas o enseñar a otras personas.
     { pregunta: 'act_3',  familia: 'SOC', peso: 1.0 },
-    // P4: Diseñar contenido
+    // P4: Crear diseños, ilustraciones o contenido creativo.
     { pregunta: 'act_4',  familia: 'CRE', peso: 1.0 },
     { pregunta: 'act_4',  familia: 'COM', peso: 0.4 },
-    // P5: Investigar
+    // P5: Investigar información para encontrar respuestas.
     { pregunta: 'act_5',  familia: 'TEC', peso: 0.8 },
     { pregunta: 'act_5',  familia: 'NEG', peso: 0.2 },
     { pregunta: 'act_5',  familia: 'SOC', peso: 0.3 },
     { pregunta: 'act_5',  familia: 'AMB', peso: 0.2 },
     { pregunta: 'act_5',  familia: 'PRO', peso: 0.4 },
-    // P6: Orientar personas
+    // P6: Escuchar y orientar a otras personas cuando lo necesitan.
     { pregunta: 'act_6',  familia: 'SOC', peso: 1.0 },
     { pregunta: 'act_6',  familia: 'COM', peso: 0.4 },
-    // P7: Negociar
+    // P7: Negociar o convencer a otras personas sobre una idea.
     { pregunta: 'act_7',  familia: 'NEG', peso: 0.5 },
     { pregunta: 'act_7',  familia: 'COM', peso: 1.0 },
     { pregunta: 'act_7',  familia: 'EMP', peso: 0.5 },
-    // P8: Crear ideas nuevas
-    { pregunta: 'act_8',  familia: 'TEC', peso: 0.4 },
-    { pregunta: 'act_8',  familia: 'NEG', peso: 0.2 },
-    { pregunta: 'act_8',  familia: 'CRE', peso: 0.6 },
+    // P8: Construir o desarrollar soluciones nuevas.
+    { pregunta: 'act_8',  familia: 'TEC', peso: 0.6 },
+    { pregunta: 'act_8',  familia: 'CRE', peso: 0.4 },
     { pregunta: 'act_8',  familia: 'EMP', peso: 1.0 },
-    // P9: Planear proyectos
-    { pregunta: 'act_9',  familia: 'NEG', peso: 0.8 },
+    // P9: Trabajar con números, indicadores o datos.
+    { pregunta: 'act_9',  familia: 'TEC', peso: 0.8 },
+    { pregunta: 'act_9',  familia: 'NEG', peso: 0.4 },
     { pregunta: 'act_9',  familia: 'PRO', peso: 1.0 },
-    { pregunta: 'act_9',  familia: 'EMP', peso: 0.5 },
-    // P10: Analizar datos
-    { pregunta: 'act_10', familia: 'TEC', peso: 0.8 },
-    { pregunta: 'act_10', familia: 'NEG', peso: 0.4 },
+    // P10: Mejorar procesos para hacerlos más eficientes.
     { pregunta: 'act_10', familia: 'PRO', peso: 1.0 },
-    // P11: Cuidado del ambiente
+    { pregunta: 'act_10', familia: 'NEG', peso: 0.5 },
+    { pregunta: 'act_10', familia: 'TEC', peso: 0.3 },
+    // P11: Trabajar en espacios al aire libre o relacionados con la naturaleza.
     { pregunta: 'act_11', familia: 'SOC', peso: 0.2 },
     { pregunta: 'act_11', familia: 'AMB', peso: 1.0 },
     { pregunta: 'act_11', familia: 'PRO', peso: 0.3 },
-    // P12: Atender personas
-    { pregunta: 'act_12', familia: 'NEG', peso: 0.2 },
-    { pregunta: 'act_12', familia: 'SOC', peso: 0.6 },
+    // P12: Hablar en público o presentar ideas frente a un grupo.
     { pregunta: 'act_12', familia: 'COM', peso: 1.0 },
+    { pregunta: 'act_12', familia: 'CRE', peso: 0.5 },
+    { pregunta: 'act_12', familia: 'EMP', peso: 0.5 },
   ],
 
   // ── BLOQUE 3: Fortalezas Personales (peso del bloque: 20%) ──
   fortalezas: [
-    // Organización
-    { pregunta: 'for_1',  familia: 'TEC', peso: 0.2 },
+    // P1: Soy una persona disciplinada. (Disciplina)
+    { pregunta: 'for_1',  familia: 'TEC', peso: 0.3 },
     { pregunta: 'for_1',  familia: 'NEG', peso: 0.5 },
     { pregunta: 'for_1',  familia: 'PRO', peso: 0.8 },
-    { pregunta: 'for_1',  familia: 'EMP', peso: 0.2 },
-    // Aprendizaje autónomo
+    { pregunta: 'for_1',  familia: 'EMP', peso: 0.3 },
+    // P2: Aprendo con facilidad cuando algo me interesa. (Aprendizaje autónomo)
     { pregunta: 'for_2',  familia: 'TEC', peso: 0.4 },
     { pregunta: 'for_2',  familia: 'NEG', peso: 0.2 },
     { pregunta: 'for_2',  familia: 'SOC', peso: 0.2 },
     { pregunta: 'for_2',  familia: 'PRO', peso: 0.4 },
-    // Adaptabilidad
+    // P3: Me adapto bien a los cambios. (Adaptabilidad)
     { pregunta: 'for_3',  familia: 'TEC', peso: 0.2 },
     { pregunta: 'for_3',  familia: 'NEG', peso: 0.3 },
     { pregunta: 'for_3',  familia: 'SOC', peso: 0.3 },
@@ -623,50 +615,48 @@ export const MATRIZ_PONDERACION = {
     { pregunta: 'for_3',  familia: 'COM', peso: 0.2 },
     { pregunta: 'for_3',  familia: 'PRO', peso: 0.2 },
     { pregunta: 'for_3',  familia: 'EMP', peso: 0.3 },
-    // Trabajo en equipo
+    // P4: Trabajo bien en equipo. (Trabajo colaborativo)
     { pregunta: 'for_4',  familia: 'NEG', peso: 0.4 },
     { pregunta: 'for_4',  familia: 'SOC', peso: 0.5 },
     { pregunta: 'for_4',  familia: 'COM', peso: 0.3 },
     { pregunta: 'for_4',  familia: 'PRO', peso: 0.3 },
     { pregunta: 'for_4',  familia: 'EMP', peso: 0.2 },
-    // Liderazgo
-    { pregunta: 'for_5',  familia: 'NEG', peso: 0.8 },
-    { pregunta: 'for_5',  familia: 'SOC', peso: 0.2 },
-    { pregunta: 'for_5',  familia: 'COM', peso: 0.3 },
-    { pregunta: 'for_5',  familia: 'PRO', peso: 0.2 },
-    { pregunta: 'for_5',  familia: 'EMP', peso: 0.8 },
-    // Resolver problemas
+    // P5: Las personas suelen confiar en mí para asumir responsabilidades. (Responsabilidad)
+    { pregunta: 'for_5',  familia: 'NEG', peso: 0.6 },
+    { pregunta: 'for_5',  familia: 'SOC', peso: 0.4 },
+    { pregunta: 'for_5',  familia: 'PRO', peso: 0.4 },
+    { pregunta: 'for_5',  familia: 'EMP', peso: 0.6 },
+    // P6: Mantengo la calma cuando debo resolver problemas. (Resolución de problemas)
     { pregunta: 'for_6',  familia: 'TEC', peso: 0.8 },
     { pregunta: 'for_6',  familia: 'NEG', peso: 0.2 },
     { pregunta: 'for_6',  familia: 'PRO', peso: 0.8 },
     { pregunta: 'for_6',  familia: 'EMP', peso: 0.2 },
-    // Creatividad
+    // P7: Suelo aportar ideas originales. (Creatividad)
     { pregunta: 'for_7',  familia: 'TEC', peso: 0.2 },
     { pregunta: 'for_7',  familia: 'CRE', peso: 1.0 },
     { pregunta: 'for_7',  familia: 'EMP', peso: 0.5 },
-    // Comunicación
+    // P8: Me comunico con claridad y respeto. (Comunicación)
     { pregunta: 'for_8',  familia: 'NEG', peso: 0.2 },
     { pregunta: 'for_8',  familia: 'SOC', peso: 0.6 },
     { pregunta: 'for_8',  familia: 'CRE', peso: 0.3 },
     { pregunta: 'for_8',  familia: 'COM', peso: 0.8 },
     { pregunta: 'for_8',  familia: 'EMP', peso: 0.2 },
-    // Perseverancia
+    // P9: Soy perseverante cuando tengo un objetivo. (Perseverancia)
     { pregunta: 'for_9',  familia: 'TEC', peso: 0.3 },
     { pregunta: 'for_9',  familia: 'NEG', peso: 0.3 },
     { pregunta: 'for_9',  familia: 'SOC', peso: 0.2 },
     { pregunta: 'for_9',  familia: 'PRO', peso: 0.4 },
     { pregunta: 'for_9',  familia: 'EMP', peso: 0.6 },
-    // Disciplina
-    { pregunta: 'for_10', familia: 'TEC', peso: 0.3 },
-    { pregunta: 'for_10', familia: 'NEG', peso: 0.5 },
+    // P10: Presto atención a los detalles. (Atención a los detalles)
     { pregunta: 'for_10', familia: 'PRO', peso: 0.8 },
-    { pregunta: 'for_10', familia: 'EMP', peso: 0.3 },
-    // Competencia digital
+    { pregunta: 'for_10', familia: 'TEC', peso: 0.5 },
+    { pregunta: 'for_10', familia: 'NEG', peso: 0.4 },
+    // P11: Me siento cómodo utilizando herramientas tecnológicas. (Competencia digital)
     { pregunta: 'for_11', familia: 'TEC', peso: 0.8 },
     { pregunta: 'for_11', familia: 'NEG', peso: 0.2 },
     { pregunta: 'for_11', familia: 'CRE', peso: 0.2 },
     { pregunta: 'for_11', familia: 'PRO', peso: 0.4 },
-    // Curiosidad intelectual
+    // P12: Tengo curiosidad por aprender constantemente. (Curiosidad intelectual)
     { pregunta: 'for_12', familia: 'TEC', peso: 0.6 },
     { pregunta: 'for_12', familia: 'NEG', peso: 0.2 },
     { pregunta: 'for_12', familia: 'SOC', peso: 0.2 },

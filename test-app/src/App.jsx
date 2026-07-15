@@ -849,8 +849,10 @@ export default function App() {
 
   const pantallaActual = PANTALLAS[pantallaIdx];
 
-  // Determinar si hay región estratégica
-  const regionEstrategica = REGIONES_ESTRATEGICAS[personalData.departamento] || null;
+  // Determinar si hay región estratégica (se salta si responde 'No' en ctx_5)
+  const regionEstrategica = (REGIONES_ESTRATEGICAS[personalData.departamento] && contexto.ctx_5 !== 'No.')
+    ? REGIONES_ESTRATEGICAS[personalData.departamento]
+    : null;
 
   // Guardar en localStorage en cada cambio
   useEffect(() => {
@@ -1052,8 +1054,8 @@ export default function App() {
     {pantallaActual === 'intereses' && (
       <PantallaLikert
         badge="🎯 Intereses Vocacionales"
-        title="Tus intereses"
-        subtitle="Ahora queremos conocer qué temas despiertan más tu interés. Lee cada afirmación y selecciona qué tanto te identifica."
+        title="¿Qué temas despiertan tu curiosidad?"
+        subtitle="Pregunta guía: ¿Qué me interesa aprender o conocer?"
         questions={PREGUNTAS_INTERESES} scale={ESCALA_INTERESES}
         answers={intereses} onChange={setIntereses}
         onNext={goNext} onBack={goBack}
@@ -1063,8 +1065,8 @@ export default function App() {
     {pantallaActual === 'actividades' && (
       <PantallaLikert
         badge="🎮 Actividades que disfruto"
-        title="Actividades que disfruto"
-        subtitle="Cada persona disfruta actividades diferentes. Cuéntanos cuáles te motivan más. ¿Qué tanto disfrutas realizar las siguientes actividades?"
+        title="¿Qué disfrutas haciendo?"
+        subtitle="Pregunta guía: ¿Qué actividades disfruto realizar?"
         questions={PREGUNTAS_ACTIVIDADES} scale={ESCALA_ACTIVIDADES}
         answers={actividades} onChange={setActividades}
         onNext={goNext} onBack={goBack}
@@ -1074,8 +1076,8 @@ export default function App() {
     {pantallaActual === 'fortalezas' && (
       <PantallaLikert
         badge="💎 Fortalezas Personales"
-        title="Fortalezas personales"
-        subtitle="Todas las personas tienen fortalezas únicas. Ayúdanos a conocer las tuyas. ¿Qué tanto te identificas con las siguientes afirmaciones?"
+        title="¿Cuáles de estas características te describen mejor?"
+        subtitle="Pregunta guía: ¿Cómo soy?"
         questions={PREGUNTAS_FORTALEZAS} scale={ESCALA_FORTALEZAS}
         answers={fortalezas} onChange={setFortalezas}
         onNext={goNext} onBack={goBack}
@@ -1085,8 +1087,8 @@ export default function App() {
     {pantallaActual === 'virtual' && (
       <PantallaLikert
         badge="💻 Educación Virtual"
-        title="Aprender en modalidad virtual"
-        subtitle="Cada persona tiene una forma diferente de aprender. La educación virtual ofrece flexibilidad, pero también requiere organización, compromiso y autonomía. Las siguientes preguntas nos ayudarán a conocer cómo te sientes frente a esta modalidad."
+        title="¿Qué tan preparado te sientes para estudiar virtualmente?"
+        subtitle="Pregunta guía: ¿Tengo las condiciones y hábitos para estudiar virtualmente?"
         questions={PREGUNTAS_VIRTUAL} scale={ESCALA_VIRTUAL}
         answers={virtual} onChange={setVirtual}
         onNext={goNext} onBack={goBack}
