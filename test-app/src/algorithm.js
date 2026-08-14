@@ -109,9 +109,9 @@ export function clasificarAfinidad(todosOrdenados) {
 
 // ─── 6. Calcular IPMV (Índice Preparación Modalidad Virtual) ─
 export function calcularIPMV(respuestasVirtual) {
-  const ids = ['vir_1','vir_2','vir_3','vir_4','vir_5','vir_6','vir_7','vir_8'];
+  const ids = ['vir_1','vir_2','vir_3','vir_4','vir_5','vir_6'];
   const suma = ids.reduce((s, id) => s + (respuestasVirtual[id] || 3), 0);
-  const maxPosible = 40; // 8 preguntas × 5
+  const maxPosible = 30; // 6 preguntas × 5
   const porcentaje = Math.round((suma / maxPosible) * 100);
 
   let nivel;

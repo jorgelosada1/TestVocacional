@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import {
   DEPARTAMENTOS, REGIONES_ESTRATEGICAS,
   PREGUNTAS_CARACTERIZACION, PREGUNTAS_INTERESES, PREGUNTAS_ACTIVIDADES,
@@ -295,18 +295,33 @@ function PantallaCaracterizacion({ answers, onChange, onNext, onBack }) {
   </div>;
 }
 
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 // ═══════════════════════════════════════════════════════════════
 // PANTALLA LIKERT GENÉRICA (Intereses, Actividades, Fortalezas, Virtual)
 // ═══════════════════════════════════════════════════════════════
 function PantallaLikert({ badge, title, subtitle, questions, scale, answers, onChange, onNext, onBack }) {
   const allAnswered = questions.every(q => answers[q.id]);
+  
+  // Shuffle questions exactly once when this block screen mounts
+  const shuffledQuestions = useMemo(() => {
+    return shuffleArray(questions);
+  }, [questions]);
+
   return <div className="test-container">
     <div className="section-header fade-in">
       <div className="section-badge">{badge}</div>
       <h3 className="section-title">{title}</h3>
       {subtitle && <p className="section-desc">{subtitle}</p>}
     </div>
-    {questions.map((q, i) => (
+    {shuffledQuestions.map((q, i) => (
       <LikertQuestion key={q.id} question={q} value={answers[q.id]} index={i} scale={scale}
         onChange={val => onChange({...answers, [q.id]: val})} />
     ))}
@@ -1054,8 +1069,8 @@ export default function App() {
     {pantallaActual === 'intereses' && (
       <PantallaLikert
         badge="🎯 Intereses Vocacionales"
-        title="¿Qué temas despiertan tu curiosidad?"
-        subtitle="Pregunta guía: ¿Qué me interesa aprender o conocer?"
+        title="Intereses Vocacionales"
+        subtitle="Objetivo: Identificar los temas que generan mayor interés o curiosidad."
         questions={PREGUNTAS_INTERESES} scale={ESCALA_INTERESES}
         answers={intereses} onChange={setIntereses}
         onNext={goNext} onBack={goBack}
@@ -1065,8 +1080,8 @@ export default function App() {
     {pantallaActual === 'actividades' && (
       <PantallaLikert
         badge="🎮 Actividades que disfruto"
-        title="¿Qué disfrutas haciendo?"
-        subtitle="Pregunta guía: ¿Qué actividades disfruto realizar?"
+        title="Actividades que disfruto"
+        subtitle="Objetivo: Identificar las actividades que más disfruta realizar el estudiante."
         questions={PREGUNTAS_ACTIVIDADES} scale={ESCALA_ACTIVIDADES}
         answers={actividades} onChange={setActividades}
         onNext={goNext} onBack={goBack}
@@ -1076,8 +1091,8 @@ export default function App() {
     {pantallaActual === 'fortalezas' && (
       <PantallaLikert
         badge="💎 Fortalezas Personales"
-        title="¿Cuáles de estas características te describen mejor?"
-        subtitle="Pregunta guía: ¿Cómo soy?"
+        title="Fortalezas Personales"
+        subtitle="Objetivo: Conocer cómo percibe el estudiante sus habilidades y características."
         questions={PREGUNTAS_FORTALEZAS} scale={ESCALA_FORTALEZAS}
         answers={fortalezas} onChange={setFortalezas}
         onNext={goNext} onBack={goBack}
@@ -1087,8 +1102,8 @@ export default function App() {
     {pantallaActual === 'virtual' && (
       <PantallaLikert
         badge="💻 Educación Virtual"
-        title="¿Qué tan preparado te sientes para estudiar virtualmente?"
-        subtitle="Pregunta guía: ¿Tengo las condiciones y hábitos para estudiar virtualmente?"
+        title="Preparación para la Educación Virtual"
+        subtitle="Objetivo: Conocer si el estudiante cuenta con las condiciones y hábitos para estudiar en modalidad virtual. Estas preguntas no afectan el perfil vocacional."
         questions={PREGUNTAS_VIRTUAL} scale={ESCALA_VIRTUAL}
         answers={virtual} onChange={setVirtual}
         onNext={goNext} onBack={goBack}
