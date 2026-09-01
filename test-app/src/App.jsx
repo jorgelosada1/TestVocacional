@@ -443,7 +443,7 @@ function PantallaRegional({ region, answers, onChange, onNext, onBack }) {
 // ═══════════════════════════════════════════════════════════════
 // PANTALLA 10: NIVEL EDUCATIVO
 // ═══════════════════════════════════════════════════════════════
-function PantallaNivelEducativo({ answers, onChange, onNext, onBack }) {
+function PantallaNivelEducativo({ answers, onChange, onNext, onBack, isSubmitting }) {
   const visibleQuestions = PREGUNTAS_NIVEL_EDUCATIVO.filter(q =>
     !q.showIf || q.showIf(answers)
   );
@@ -461,6 +461,7 @@ function PantallaNivelEducativo({ answers, onChange, onNext, onBack }) {
     {visibleQuestions.map((q, i) => (
       <RadioQuestion key={q.id} q={q} value={answers[q.id]} index={i}
         onChange={val => {
+          if (isSubmitting) return;
           const updated = {...answers, [q.id]: val};
           // Limpiar respuestas condicionales al cambiar P1
           if (q.id === 'niv_1') {
@@ -480,11 +481,22 @@ function PantallaNivelEducativo({ answers, onChange, onNext, onBack }) {
       </div>
     )}
 
-    <button className={`btn-next result-btn${allAnswered?' active':' disabled'}`}
-      onClick={allAnswered?onNext:undefined} disabled={!allAnswered}>
-      ✨ Ver mi resultado →
+    <button 
+      className={`btn-next result-btn${allAnswered && !isSubmitting ? ' active' : ' disabled'}`}
+      onClick={allAnswered && !isSubmitting ? onNext : undefined} 
+      disabled={!allAnswered || isSubmitting}
+      style={isSubmitting ? { opacity: 0.7, cursor: 'not-allowed', pointerEvents: 'none' } : undefined}
+    >
+      {isSubmitting ? '⏳ Procesando resultados...' : '✨ Ver mi resultado →'}
     </button>
-    <button className="btn-back" onClick={onBack}>← Volver</button>
+    <button 
+      className="btn-back" 
+      onClick={!isSubmitting ? onBack : undefined}
+      disabled={isSubmitting}
+      style={isSubmitting ? { pointerEvents: 'none', opacity: 0.5 } : undefined}
+    >
+      ← Volver
+    </button>
     {!allAnswered && <p className="unanswered-msg">⚠ Responde todas las preguntas para continuar</p>}
   </div>;
 }
@@ -861,6 +873,8 @@ export default function App() {
   const [nivelEducativo, setNivelEducativo] = useState({});
   const [resultado, setResultado] = useState(null);
   const [showResume, setShowResume] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   const pantallaActual = PANTALLAS[pantallaIdx];
 
@@ -907,6 +921,8 @@ export default function App() {
       setRegional(saved.regional || {});
       setNivelEducativo(saved.nivelEducativo || {});
       setPantallaIdx(saved.pantallaIdx || 1);
+      isSubmittingRef.current = false;
+      setIsSubmitting(false);
     } catch { setPantallaIdx(0); }
     setShowResume(false);
   }, []);
@@ -934,6 +950,14 @@ export default function App() {
   }, [pantallaIdx, regionEstrategica]);
 
   const handleProcesar = useCallback(async () => {
+    // Sellar inmediatamente para evitar cualquier doble o múltiple envío
+    if (isSubmittingRef.current) {
+      console.warn("handleProcesar bloqueado: el formulario ya fue enviado o está en proceso.");
+      return;
+    }
+    isSubmittingRef.current = true;
+    setIsSubmitting(true);
+
     console.log("=== INICIO DE PROCESAMIENTO Y ENVÍO DE DATOS ===");
     const niv = nivelEducativo.niv_1 || 'bachiller';
     console.log("Nivel educativo seleccionado:", niv);
@@ -1001,6 +1025,9 @@ export default function App() {
 
     console.log("Objeto de datos preparado para envío:", datosEnvio);
 
+    // Inmediatamente avanzar a la pantalla de procesamiento para desmontar el botón y evitar cualquier interacción
+    goNext();
+
     try {
       console.log("Llamando a la función enviarResultadosAGoogleSheets...");
       const resultEnvio = await enviarResultadosAGoogleSheets(datosEnvio);
@@ -1008,12 +1035,11 @@ export default function App() {
     } catch (err) {
       console.error("Error capturado en handleProcesar al enviar los resultados a Google Sheets:", err);
     }
-
-    console.log("Transicionando a la pantalla de resultados (goNext)...");
-    goNext(); // a resultado
   }, [intereses, actividades, fortalezas, virtual, nivelEducativo, personalData, motivaciones, goNext]);
 
   const handleRestart = useCallback(() => {
+    isSubmittingRef.current = false;
+    setIsSubmitting(false);
     localStorage.removeItem(STORAGE_KEY);
     setPantallaIdx(0);
     setPersonalData({}); setCaracterizacion({}); setIntereses({});
@@ -1126,7 +1152,7 @@ export default function App() {
 
     {pantallaActual === 'nivel_educativo' && (
       <PantallaNivelEducativo answers={nivelEducativo} onChange={setNivelEducativo}
-        onNext={handleProcesar} onBack={goBack} />
+        onNext={handleProcesar} onBack={goBack} isSubmitting={isSubmitting} />
     )}
 
     {pantallaActual === 'procesamiento' && (
