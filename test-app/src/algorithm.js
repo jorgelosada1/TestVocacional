@@ -3,7 +3,7 @@
 // ============================================================
 import {
   MATRIZ_PONDERACION, PESOS_BLOQUES, PERFILES,
-  PROGRAMAS_RECOMENDADOS, MENSAJES_IPMV, FAMILIAS,
+  PROGRAMAS_POR_UNIVERSIDAD, MENSAJES_IPMV, FAMILIAS,
   PREGUNTAS_FORTALEZAS,
 } from './data';
 
@@ -120,9 +120,9 @@ export function calcularIPMV(respuestasVirtual) {
   else nivel = 'bajo';
 
   return {
+    ...MENSAJES_IPMV[nivel],
     nivel,
     porcentaje,
-    ...MENSAJES_IPMV[nivel],
   };
 }
 
@@ -138,42 +138,41 @@ export function obtenerFortalezasDestacadas(respuestasFortalezas) {
   return destacadas;
 }
 
-// ─── 8. Filtrar programas según perfil y nivel educativo ────
-export function filtrarProgramas(perfilPrincipal, perfilComplementario, nivelEducativo, hayEmpate) {
-  // Perfiles a considerar
-  const perfiles = [perfilPrincipal];
-  if (hayEmpate) perfiles.push(perfilComplementario);
+// ─── 8. Filtrar programas según universidad, perfil y nivel educativo ─
+const MIN_PROGRAMAS = 3;
 
-  const programasFiltrados = PROGRAMAS_RECOMENDADOS
-    .filter(p => {
-      // Solo programas activos
-      if (p.estado !== 'Activo') return false;
+export function filtrarProgramas(universidad, familiasOrdenadas, nivelEducativo, hayEmpate) {
+  const catalogo = (PROGRAMAS_POR_UNIVERSIDAD[universidad] || [])
+    .filter(p => p.estado === 'Activo' && p.nivelRequerido.includes(nivelEducativo));
 
-      // Nivel educativo compatible
-      const esNivelCompatible = p.nivelRequerido.includes(nivelEducativo);
-      if (!esNivelCompatible) return false;
+  const coincide = (p, perfiles) =>
+    perfiles.includes(p.familiaPrincipal) ||
+    (p.familiaSecundaria && perfiles.includes(p.familiaSecundaria));
 
-      // Perfil compatible (ya sea principal o secundaria)
-      const esPerfilCompatible = perfiles.includes(p.familiaPrincipal) || 
-                                (p.familiaSecundaria && perfiles.includes(p.familiaSecundaria));
-      return esPerfilCompatible;
-    })
+  // Perfiles a considerar: principal (+ complementario si hay empate).
+  // Si la universidad no ofrece suficientes programas para esos perfiles,
+  // se amplía con las siguientes familias de mayor afinidad.
+  let cuantos = hayEmpate ? 2 : 1;
+  let perfiles = familiasOrdenadas.slice(0, cuantos);
+  while (
+    cuantos < familiasOrdenadas.length &&
+    catalogo.filter(p => coincide(p, perfiles)).length < MIN_PROGRAMAS
+  ) {
+    cuantos++;
+    perfiles = familiasOrdenadas.slice(0, cuantos);
+  }
+
+  return catalogo
+    .filter(p => coincide(p, perfiles))
     .map(p => {
-      // Calcular una prioridad interna para ordenar
-      // 1: Principal de la carrera coincide con perfil principal
-      // 2: Principal de la carrera coincide con perfil complementario (si hay empate)
-      // 3: Secundaria de la carrera coincide con perfil principal
-      // 4: Secundaria de la carrera coincide con perfil complementario (si hay empate)
-      let matchScore = 99;
-      if (p.familiaPrincipal === perfilPrincipal) {
-        matchScore = 1;
-      } else if (hayEmpate && p.familiaPrincipal === perfilComplementario) {
-        matchScore = 2;
-      } else if (p.familiaSecundaria === perfilPrincipal) {
-        matchScore = 3;
-      } else if (hayEmpate && p.familiaSecundaria === perfilComplementario) {
-        matchScore = 4;
-      }
+      // Prioridad interna: la familia principal de la carrera pesa más que la
+      // secundaria, y un perfil más afín pesa más que uno menos afín.
+      const rankPrincipal = perfiles.indexOf(p.familiaPrincipal);
+      const rankSecundaria = p.familiaSecundaria ? perfiles.indexOf(p.familiaSecundaria) : -1;
+      const matchScore = Math.min(
+        rankPrincipal >= 0 ? rankPrincipal * 2 + 1 : 99,
+        rankSecundaria >= 0 ? rankSecundaria * 2 + 2 : 99,
+      );
       return { ...p, matchScore };
     })
     .sort((a, b) => {
@@ -184,8 +183,6 @@ export function filtrarProgramas(perfilPrincipal, perfilComplementario, nivelEdu
       // Luego por la prioridad oficial del programa
       return a.prioridad - b.prioridad;
     });
-
-  return programasFiltrados;
 }
 
 // ─── 9. Agrupar programas por nivel de afinidad ─────────────
@@ -224,6 +221,7 @@ export function calcularResultadoCompleto({
   fortalezas,
   virtual,
   nivelEducativo,
+  universidad,
 }) {
   // 1. Puntajes ponderados
   const puntajes = calcularPuntajesFinales(intereses, actividades, fortalezas);
@@ -245,8 +243,8 @@ export function calcularResultadoCompleto({
 
   // 7. Programas
   const programasFiltrados = filtrarProgramas(
-    perfiles.principal.familia,
-    perfiles.complementario.familia,
+    universidad,
+    perfiles.todosOrdenados.map(p => p.familia),
     nivelEducativo,
     perfiles.hayEmpate,
   );

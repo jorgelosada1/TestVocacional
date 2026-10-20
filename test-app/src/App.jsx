@@ -5,53 +5,49 @@ import {
   PREGUNTAS_FORTALEZAS, PREGUNTAS_VIRTUAL, PREGUNTAS_MOTIVACIONES,
   PREGUNTAS_CONTEXTO, PREGUNTAS_REGIONALES, PREGUNTAS_NIVEL_EDUCATIVO,
   ESCALA_INTERESES, ESCALA_ACTIVIDADES, ESCALA_FORTALEZAS, ESCALA_VIRTUAL,
-  PERFILES, FAMILIAS,
+  PERFILES, FAMILIAS, UNIVERSIDADES,
 } from './data';
 import { calcularResultadoCompleto } from './algorithm';
 import {
   Trophy, Cpu, ChartBar, Users, PaintBrush, Leaf, Handshake, Gear,
   Lightbulb, Star, Monitor, Target, BookOpen, WhatsappLogo, FileText,
-  ArrowCounterClockwise
+  ArrowCounterClockwise, GraduationCap, Clock, Compass, CheckCircle,
+  ArrowRight, MapPin
 } from '@phosphor-icons/react';
 import './App.css';
 
-const STORAGE_KEY = 'brujula_vocacional_v2';
+const STORAGE_KEY = 'brujula_vocacional_v3';
 
 // ═══════════════════════════════════════════════════════════════
 // COMPONENTES COMPARTIDOS
 // ═══════════════════════════════════════════════════════════════
 
 function AnimatedBg() {
-  return <>
-    <div className="animated-bg"><div className="orb orb-1"/><div className="orb orb-2"/><div className="orb orb-3"/></div>
-    <div className="particles-container">
-      {Array.from({length:14},(_,i)=>(
-        <div key={i} className="particle" style={{
-          left:`${(i*7+11)%100}%`,
-          animationDelay:`${i*0.6}s`,
-          animationDuration:`${7+i%5}s`,
-          width:`${4+i%4}px`,
-          height:`${4+i%4}px`,
-          opacity:0.12+((i%3)*0.05),
-          background:['#1A5DAB','#4DACE8','#F5A623'][i%3],
-        }}/>
-      ))}
-    </div>
-  </>;
+  return <div className="animated-bg" aria-hidden="true">
+    <div className="orb orb-1"/><div className="orb orb-2"/><div className="orb orb-3"/>
+  </div>;
 }
 
-function Header() {
+function Header({ universidad }) {
+  const uni = UNIVERSIDADES[universidad];
   return <header className="app-header">
-    <img src="/logo.png" alt="Logo" />
-    <h1>Innovación <span className="header-accent">e-Learning</span> S.A.S.</h1>
+    <div className="app-header-brand">
+      <img src="/logo.png" alt="Innovación e-Learning" />
+      <h1>Innovación <span className="header-accent">e-Learning</span></h1>
+    </div>
+    {uni && (
+      <span className="header-uni-chip" title={uni.nombreCompleto}>
+        <GraduationCap size={16} weight="fill" /> {uni.nombre}
+      </span>
+    )}
   </header>;
 }
 
-function GlobalProgress({ current, total }) {
+function GlobalProgress({ current, total, label }) {
   const pct = Math.round(((current) / total) * 100);
   return <div className="global-progress">
     <div className="global-progress-info">
-      <span>Paso {current} de {total}</span>
+      <span>Paso {current} de {total}{label && <span className="global-progress-label"> · {label}</span>}</span>
       <span className="global-progress-pct">{pct}%</span>
     </div>
     <div className="global-progress-bar">
@@ -163,21 +159,47 @@ function CheckboxQuestion({ q, values = [], onChange, index }) {
 // ═══════════════════════════════════════════════════════════════
 // PANTALLA 1: BIENVENIDA
 // ═══════════════════════════════════════════════════════════════
-function PantallaBienvenida({ onNext }) {
+function PantallaBienvenida({ universidad, onSelectUniversidad, onNext }) {
   return <div className="welcome-screen">
     <div className="welcome-glass fade-in">
-      <div className="welcome-logo-wrap"><img src="/logo.png" alt="Logo" /></div>
+      <div className="welcome-logo-wrap"><Compass size={44} weight="duotone" /></div>
+      <p className="welcome-eyebrow">Test de orientación vocacional</p>
       <h2 className="welcome-title">Brújula Vocacional</h2>
-      <p className="welcome-tagline">✨ Descubre el camino que conecta con tu futuro ✨</p>
+      <p className="welcome-tagline">Descubre el camino que conecta con tu futuro</p>
       <div className="welcome-desc">
-        <p>Elegir qué estudiar es una de las decisiones más importantes de tu vida.</p>
-        <p>La <strong>Brújula Vocacional</strong> ha sido diseñada para ayudarte a descubrir las áreas de formación que mejor se relacionan con tus intereses, fortalezas, motivaciones y proyecto de vida.</p>
-        <p><strong>No existen respuestas buenas o malas.</strong></p>
-        <p>Responde con sinceridad y al finalizar recibirás una orientación personalizada junto con programas académicos que podrían ajustarse a tu perfil.</p>
+        <p>Elegir qué estudiar es una de las decisiones más importantes de tu vida. La <strong>Brújula Vocacional</strong> te ayuda a descubrir las áreas de formación que mejor se relacionan con tus intereses, fortalezas, motivaciones y proyecto de vida.</p>
+        <p><strong>No existen respuestas buenas o malas.</strong> Responde con sinceridad y al finalizar recibirás una orientación personalizada con programas académicos que se ajustan a tu perfil.</p>
       </div>
-      <p className="welcome-duration">⏱ Duración aproximada: 10 a 12 minutos</p>
-      <button className="btn-start fade-in d2" onClick={onNext}>
-        Quiero descubrir mi perfil →
+      <ul className="welcome-features">
+        <li><Clock size={18} weight="bold" /> 10 a 12 minutos</li>
+        <li><Compass size={18} weight="bold" /> 8 áreas vocacionales</li>
+        <li><CheckCircle size={18} weight="bold" /> Resultado inmediato</li>
+      </ul>
+
+      <fieldset className="uni-picker">
+        <legend className="uni-picker-title">¿En qué universidad te gustaría estudiar?</legend>
+        <div className="uni-options">
+          {Object.values(UNIVERSIDADES).map(u => (
+            <button
+              key={u.id}
+              type="button"
+              className={`uni-option uni-${u.id}${universidad === u.id ? ' selected' : ''}`}
+              onClick={() => onSelectUniversidad(u.id)}
+              aria-pressed={universidad === u.id}
+            >
+              <span className="uni-option-icon"><GraduationCap size={26} weight="fill" /></span>
+              <span className="uni-option-text">
+                <span className="uni-option-name">{u.nombre}</span>
+                <span className="uni-option-full">{u.nombreCompleto}</span>
+              </span>
+              <span className="uni-option-check" aria-hidden="true"><CheckCircle size={22} weight="fill" /></span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      <button className="btn-start" onClick={universidad ? onNext : undefined} disabled={!universidad}>
+        {universidad ? <>Quiero descubrir mi perfil <ArrowRight size={18} weight="bold" /></> : 'Selecciona una universidad para comenzar'}
       </button>
     </div>
   </div>;
@@ -218,7 +240,7 @@ function PantallaDatos({ data, onChange, onNext, onBack }) {
   return <div className="form-screen">
     <form className="form-glass fade-in" onSubmit={handleSubmit}>
       <div className="form-header">
-        <div className="form-badge">👤 Paso 1</div>
+        <div className="form-badge">👤 Datos personales</div>
         <h2>Conozcámonos</h2>
         <p>Todos los campos son obligatorios</p>
       </div>
@@ -392,7 +414,7 @@ function PantallaContexto({ answers, onChange, onNext, onBack, departamento }) {
     {/* Departamento pre-cargado (solo lectura) */}
     <div className="readonly-field fade-in">
       <p className="question-text"><span className="question-num">1.</span> ¿Actualmente dónde resides?</p>
-      <div className="readonly-value">📍 {departamento}</div>
+      <div className="readonly-value"><MapPin size={18} weight="fill" /> {departamento}</div>
     </div>
 
     {PREGUNTAS_CONTEXTO.map((q, i) => {
@@ -562,7 +584,29 @@ const FAMILIA_ICONS = {
   EMP: Lightbulb
 };
 
-function PantallaResultado({ result, personalData, motivaciones, onRestart }) {
+const AFINIDAD_GROUPS = [
+  { key: 'alta', label: 'Alta afinidad' },
+  { key: 'buena', label: 'Buena afinidad' },
+  { key: 'interes', label: 'También podría interesarte' },
+];
+
+function ProgramaCard({ p, grupo }) {
+  return (
+    <div className={`program-item program-${grupo}`}>
+      <span className="program-icon"><GraduationCap size={20} weight="duotone" /></span>
+      <div className="program-info">
+        <span className="program-name">{p.programa}</span>
+        <span className="program-meta">
+          <span className="program-chip">{p.nivel}</span>
+          {p.modalidad && <span className="program-chip chip-modalidad">{p.modalidad}</span>}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function PantallaResultado({ result, personalData, motivaciones, universidad, onRestart }) {
+  const uni = UNIVERSIDADES[universidad];
   const [showAllPrograms, setShowAllPrograms] = useState(false);
   const { perfiles, ipmv, fortalezasDestacadas, programasAgrupados, porcentajes } = result;
   const principal = perfiles.principal;
@@ -597,6 +641,7 @@ function PantallaResultado({ result, personalData, motivaciones, onRestart }) {
         <span className="results-hero-icon"><Trophy size={48} weight="fill" /></span>
         <h2>Tu perfil vocacional</h2>
         <p>Resultados para <strong>{personalData.nombre}</strong></p>
+        {uni && <span className="results-hero-uni"><GraduationCap size={16} weight="fill" /> {uni.nombreCompleto}</span>}
       </div>
 
       {/* PERFIL PRINCIPAL */}
@@ -635,9 +680,9 @@ function PantallaResultado({ result, personalData, motivaciones, onRestart }) {
         {perfiles.todosOrdenados.slice(0, 5).map((p, i) => {
           let afinidadClass = '';
           let afinidadLabel = '';
-          if (p.porcentaje >= 90) { afinidadClass = 'afinidad-alta'; afinidadLabel = '🟢 Alta afinidad'; }
-          else if (p.porcentaje >= 75) { afinidadClass = 'afinidad-buena'; afinidadLabel = '🟡 Buena afinidad'; }
-          else if (p.porcentaje >= 60) { afinidadClass = 'afinidad-interes'; afinidadLabel = '🔵 También podría interesarte'; }
+          if (p.porcentaje >= 90) { afinidadClass = 'afinidad-alta'; afinidadLabel = 'Alta afinidad'; }
+          else if (p.porcentaje >= 75) { afinidadClass = 'afinidad-buena'; afinidadLabel = 'Buena afinidad'; }
+          else if (p.porcentaje >= 60) { afinidadClass = 'afinidad-interes'; afinidadLabel = 'También podría interesarte'; }
           
           const BarIcon = FAMILIA_ICONS[p.familia] || Star;
           return (
@@ -712,49 +757,24 @@ function PantallaResultado({ result, personalData, motivaciones, onRestart }) {
           Programas recomendados
         </h3>
         <p className="programs-subtitle">
-          Basados en tu perfil <strong>{perfData.nombre}</strong>
+          Programas de <strong>{uni?.nombre}</strong> basados en tu perfil <strong>{perfData.nombre}</strong>
         </p>
 
-        {prog_alta.length > 0 && (
-          <div className="program-group">
-            <div className="program-group-label alta">🟢 Alta afinidad</div>
-            {prog_alta.map((p, i) => (
-              <div key={i} className="program-item program-alta">
-                <div className="program-info">
-                  <span className="program-name">{p.programa}</span>
-                  <span className="program-meta">{p.nivel} · {p.modalidad || 'Virtual'}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        {AFINIDAD_GROUPS.map(({ key, label }) => {
+          const lista = { alta: prog_alta, buena: prog_buena, interes: prog_interes }[key];
+          if (lista.length === 0) return null;
+          return (
+            <div key={key} className="program-group">
+              <div className={`program-group-label ${key}`}><span className="dot" /> {label}</div>
+              {lista.map(p => <ProgramaCard key={p.programa} p={p} grupo={key} />)}
+            </div>
+          );
+        })}
 
-        {prog_buena.length > 0 && (
-          <div className="program-group">
-            <div className="program-group-label buena">🟡 Buena afinidad</div>
-            {prog_buena.map((p, i) => (
-              <div key={i} className="program-item program-buena">
-                <div className="program-info">
-                  <span className="program-name">{p.programa}</span>
-                  <span className="program-meta">{p.nivel} · {p.modalidad || 'Virtual'}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {prog_interes.length > 0 && (
-          <div className="program-group">
-            <div className="program-group-label interes">🔵 También podría interesarte</div>
-            {prog_interes.map((p, i) => (
-              <div key={i} className="program-item program-interes">
-                <div className="program-info">
-                  <span className="program-name">{p.programa}</span>
-                  <span className="program-meta">{p.nivel} · {p.modalidad || 'Virtual'}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+        {totalProgs === 0 && (
+          <p className="programs-empty">
+            No encontramos programas de {uni?.nombre} para tu nivel educativo y perfil. Un asesor puede ayudarte a explorar otras opciones.
+          </p>
         )}
 
         {totalProgs > visibleProgs && !showAllPrograms && (
@@ -765,7 +785,7 @@ function PantallaResultado({ result, personalData, motivaciones, onRestart }) {
       </div>
 
       {/* BOTONES FINALES */}
-      <a href="https://wa.me/573144377691?text=Hola,%20realic%C3%A9%20el%20Test%20Vocacional%20y%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20sobre%20mis%20opciones%20acad%C3%A9micas." target="_blank" rel="noopener noreferrer" className="btn-asesoria fade-in d5">
+      <a href={`https://wa.me/573144377691?text=${encodeURIComponent(`Hola, realicé el Test Vocacional${uni ? ` (${uni.nombre})` : ''} y me gustaría recibir asesoría sobre mis opciones académicas.`)}`} target="_blank" rel="noopener noreferrer" className="btn-asesoria fade-in d5">
         <WhatsappLogo size={22} weight="fill" style={{ marginRight: 8, verticalAlign: 'middle' }} /> Quiero recibir asesoría
       </a>
       <button className="btn-download fade-in d6 no-print" onClick={()=>window.print()}>
@@ -861,6 +881,7 @@ const PANTALLAS = [
 
 export default function App() {
   const [pantallaIdx, setPantallaIdx] = useState(0);
+  const [universidad, setUniversidad] = useState('');
   const [personalData, setPersonalData] = useState({});
   const [caracterizacion, setCaracterizacion] = useState({});
   const [intereses, setIntereses] = useState({});
@@ -888,13 +909,13 @@ export default function App() {
     if (pantallaIdx > 0 && pantallaIdx < PANTALLAS.length - 1) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          pantallaIdx, personalData, caracterizacion, intereses,
+          pantallaIdx, universidad, personalData, caracterizacion, intereses,
           actividades, fortalezas, virtual, motivaciones,
           contexto, regional, nivelEducativo,
         }));
       } catch {}
     }
-  }, [pantallaIdx, personalData, caracterizacion, intereses, actividades, fortalezas, virtual, motivaciones, contexto, regional, nivelEducativo]);
+  }, [pantallaIdx, universidad, personalData, caracterizacion, intereses, actividades, fortalezas, virtual, motivaciones, contexto, regional, nivelEducativo]);
 
   // Detectar progreso guardado
   useEffect(() => {
@@ -902,7 +923,7 @@ export default function App() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.pantallaIdx > 0) setShowResume(true);
+        if (parsed.pantallaIdx > 0 && UNIVERSIDADES[parsed.universidad]) setShowResume(true);
       }
     } catch {}
   }, []);
@@ -910,6 +931,7 @@ export default function App() {
   const handleResume = useCallback(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      setUniversidad(saved.universidad || '');
       setPersonalData(saved.personalData || {});
       setCaracterizacion(saved.caracterizacion || {});
       setIntereses(saved.intereses || {});
@@ -969,6 +991,7 @@ export default function App() {
       fortalezas,
       virtual,
       nivelEducativo: niv,
+      universidad,
     });
     console.log("Resultados calculados con éxito:", res);
 
@@ -977,6 +1000,7 @@ export default function App() {
 
     // Preparar objeto de datos para Google Sheets exactamente con las propiedades solicitadas
     const datosEnvio = {
+      universidad: UNIVERSIDADES[universidad]?.nombre || "",
       nombre: personalData.nombre || "",
       correo: personalData.correo || "",
       celular: personalData.celular || "",
@@ -1035,13 +1059,14 @@ export default function App() {
     } catch (err) {
       console.error("Error capturado en handleProcesar al enviar los resultados a Google Sheets:", err);
     }
-  }, [intereses, actividades, fortalezas, virtual, nivelEducativo, personalData, motivaciones, goNext]);
+  }, [universidad, intereses, actividades, fortalezas, virtual, nivelEducativo, personalData, motivaciones, goNext]);
 
   const handleRestart = useCallback(() => {
     isSubmittingRef.current = false;
     setIsSubmitting(false);
     localStorage.removeItem(STORAGE_KEY);
     setPantallaIdx(0);
+    setUniversidad('');
     setPersonalData({}); setCaracterizacion({}); setIntereses({});
     setActividades({}); setFortalezas({}); setVirtual({});
     setMotivaciones({}); setContexto({}); setRegional({});
@@ -1059,8 +1084,15 @@ export default function App() {
     return Math.min(paso, totalPasos);
   })();
 
-  return <div>
-    <Header/>
+  const PASO_LABELS = {
+    datos: 'Datos personales', caracterizacion: 'Caracterización', intereses: 'Intereses',
+    actividades: 'Actividades', fortalezas: 'Fortalezas', virtual: 'Educación virtual',
+    motivaciones: 'Motivaciones', contexto: 'Contexto', regional: 'Tu región',
+    nivel_educativo: 'Momento académico',
+  };
+
+  return <div className="app-shell" data-uni={universidad || undefined}>
+    <Header universidad={pantallaIdx > 0 ? universidad : ''}/>
     <AnimatedBg/>
 
     {showResume && (
@@ -1077,11 +1109,11 @@ export default function App() {
 
     {/* Barra de progreso global (solo en pasos 1-10) */}
     {pantallaIdx > 0 && pantallaIdx < PANTALLAS.indexOf('procesamiento') && (
-      <GlobalProgress current={pasoActual} total={totalPasos} />
+      <GlobalProgress current={pasoActual} total={totalPasos} label={PASO_LABELS[pantallaActual]} />
     )}
 
     {pantallaActual === 'bienvenida' && (
-      <PantallaBienvenida onNext={goNext} />
+      <PantallaBienvenida universidad={universidad} onSelectUniversidad={setUniversidad} onNext={goNext} />
     )}
 
     {pantallaActual === 'datos' && (
@@ -1161,7 +1193,7 @@ export default function App() {
 
     {pantallaActual === 'resultado' && resultado && (
       <PantallaResultado result={resultado} personalData={personalData}
-        motivaciones={motivaciones} onRestart={handleRestart} />
+        motivaciones={motivaciones} universidad={universidad} onRestart={handleRestart} />
     )}
   </div>;
 }

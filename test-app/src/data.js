@@ -658,108 +658,145 @@ export const PERFILES = {
 };
 
 // ============================================================
-// BV-005 — MATRIZ DE RECOMENDACIÓN ACADÉMICA (MATRIZ OFICIAL BV-004)
+// UNIVERSIDADES ALIADAS
 // ============================================================
-// Estructura: programa, nivel, familiaPrincipal, familiaSecundaria, prioridad, nivelRequerido, estado
-export const PROGRAMAS_RECOMENDADOS = [
-  // ── PREGRADOS (BV-004 MATRIZ OFICIAL) ──
-  { programa: 'ADMINISTRACIÓN DE EMPRESAS',                       nivel: 'Pregrado', familiaPrincipal: 'NEG', familiaSecundaria: 'EMP', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'ADMINISTRACIÓN EN SALUD',                          nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'ADMINISTRACIÓN PÚBLICA',                           nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'COMUNICACIÓN SOCIAL',                              nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'DERECHO',                                          nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'ECONOMÍA',                                         nivel: 'Pregrado', familiaPrincipal: 'NEG', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'FINANZAS Y NEGOCIOS INTERNACIONALES',              nivel: 'Pregrado', familiaPrincipal: 'COM', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'INGENIERÍA DE SISTEMAS',                           nivel: 'Pregrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'INGENIERÍA DE SOFTWARE',                           nivel: 'Pregrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'INGENIERÍA INDUSTRIAL',                            nivel: 'Pregrado', familiaPrincipal: 'PRO', familiaSecundaria: 'TEC', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'LICENCIATURA EN CIENCIAS SOCIALES',                nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'LICENCIATURA EN EDUCACIÓN INFANTIL',               nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'MARKETING DE NEGOCIOS',                            nivel: 'Pregrado', familiaPrincipal: 'COM', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'PSICOLOGÍA',                                       nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'SEGURIDAD Y SALUD EN EL TRABAJO',                  nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'PRO', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'SOCIOLOGÍA',                                       nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'TECNOLOGÍA EN GESTIÓN DE TALENTO HUMANO',          nivel: 'Pregrado', familiaPrincipal: 'NEG', familiaSecundaria: 'SOC', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'TECNOLOGÍA EN LOGÍSTICA',                          nivel: 'Pregrado', familiaPrincipal: 'PRO', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'TÉCNICO/TECNOLOGÍA EN PRODUCCIÓN DE GANADERÍA SOSTENIBLE', nivel: 'Pregrado', familiaPrincipal: 'AMB', familiaSecundaria: 'EMP', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo' },
-  { programa: 'ARQUITECTURA',                                     nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'AMB', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'COMUNICACIÓN AUDIOVISUAL Y DIGITAL',               nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'CONTADURÍA PÚBLICA',                               nivel: 'Pregrado', familiaPrincipal: 'NEG', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'DISEÑO DE MODAS',                                  nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'EMP', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'DISEÑO GRÁFICO',                                   nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'ENFERMERÍA',                                       nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'ENTRENAMIENTO DEPORTIVO',                          nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'EMP', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'FISIOTERAPIA',                                     nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INGENIERÍA AMBIENTAL',                             nivel: 'Pregrado', familiaPrincipal: 'AMB', familiaSecundaria: 'TEC', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INGENIERÍA BIOMÉDICA',                             nivel: 'Pregrado', familiaPrincipal: 'TEC', familiaSecundaria: 'SOC', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INGENIERÍA CIVIL',                                 nivel: 'Pregrado', familiaPrincipal: 'PRO', familiaSecundaria: 'AMB', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INGENIERÍA DE MINAS',                              nivel: 'Pregrado', familiaPrincipal: 'AMB', familiaSecundaria: 'PRO', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INGENIERÍA GEOLÓGICA',                             nivel: 'Pregrado', familiaPrincipal: 'AMB', familiaSecundaria: 'PRO', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'INSTRUMENTACIÓN QUIRÚRGICA',                       nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'MEDICINA',                                         nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'TEC', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'MERCADEO Y PUBLICIDAD',                            nivel: 'Pregrado', familiaPrincipal: 'COM', familiaSecundaria: 'CRE', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'NEGOCIOS INTERNACIONALES',                         nivel: 'Pregrado', familiaPrincipal: 'COM', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'ODONTOLOGÍA',                                      nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'OPTOMETRÍA',                                       nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'GASTRONOMÍA Y CULINARIA',                          nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'EMP', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'TECNOLOGÍA EN ANIMACIÓN Y POSPRODUCCIÓN AUDIOVISUAL', nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'TEC', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'TECNOLOGÍA EN GESTIÓN GASTRONÓMICA',               nivel: 'Pregrado', familiaPrincipal: 'CRE', familiaSecundaria: 'NEG', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'TECNOLOGÍA EN RADIOLOGÍA E IMÁGENES DIAGNÓSTICAS',  nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'TEC', prioridad: 2, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'TERAPIA RESPIRATORIA',                             nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
-  { programa: 'TRABAJO SOCIAL',                                   nivel: 'Pregrado', familiaPrincipal: 'SOC', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['bachiller', 'tecnico', 'tecnologo'], estado: 'Activo', modalidad: 'Presencial' },
+export const UNIVERSIDADES = {
+  areandina: {
+    id: 'areandina',
+    nombre: 'Areandina',
+    nombreCompleto: 'Fundación Universitaria del Área Andina',
+    color: '#1A5DAB',
+    colorSuave: '#E6EFFA',
+  },
+  ibero: {
+    id: 'ibero',
+    nombre: 'Ibero',
+    nombreCompleto: 'Corporación Universitaria Iberoamericana',
+    color: '#0E8A7E',
+    colorSuave: '#E3F4F1',
+  },
+};
 
-  // ── POSGRADOS (CRITERIO GENERAL BV-004) ──
-  // Alta Gerencia, Gerencia Financiera, MBA, Inteligencia de Negocios → NEG
-  { programa: 'Especialización en Alta Gerencia',                  nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Gerencia Financiera',            nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Maestría en Administración de Empresas MBA',        nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 3, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Inteligencia de Negocios',       nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 4, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Maestría en Inteligencia de Negocios',              nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 5, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Gerencia de Proyectos',          nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: null,  prioridad: 6, nivelRequerido: ['profesional'], estado: 'Activo' },
+// ============================================================
+// BV-005 — MATRIZ DE RECOMENDACIÓN ACADÉMICA POR UNIVERSIDAD
+// ============================================================
+// Estructura: programa, nivel, familiaPrincipal, familiaSecundaria, prioridad, nivelRequerido, estado, modalidad
+const PREGRADO = ['bachiller', 'tecnico', 'tecnologo'];
+const POSGRADO = ['profesional'];
 
-  // Gerencia de Mercadeo Digital → COM (secundaria: CRE)
-  { programa: 'Maestría en Gerencia de Mercadeo Digital',          nivel: 'Posgrado', familiaPrincipal: 'COM', familiaSecundaria: 'CRE', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Marketing Digital',              nivel: 'Posgrado', familiaPrincipal: 'COM', familiaSecundaria: 'CRE', prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
+const prog = (programa, nivel, familiaPrincipal, familiaSecundaria, prioridad, extra = {}) => ({
+  programa,
+  nivel,
+  familiaPrincipal,
+  familiaSecundaria,
+  prioridad,
+  nivelRequerido: ['Pregrado', 'Tecnología'].includes(nivel) ? PREGRADO : POSGRADO,
+  estado: 'Activo',
+  ...extra,
+});
 
-  // Analítica de Datos → TEC (secundaria: PRO)
-  { programa: 'Maestría en Analítica de Datos',                    nivel: 'Posgrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Analítica y Big Data',           nivel: 'Posgrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Inteligencia Artificial',        nivel: 'Posgrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 3, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Ciberseguridad',                 nivel: 'Posgrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 4, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Transformación Digital',          nivel: 'Posgrado', familiaPrincipal: 'TEC', familiaSecundaria: 'PRO', prioridad: 5, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Innovación → EMP (secundaria: NEG)
-  { programa: 'Maestría en Innovación',                            nivel: 'Posgrado', familiaPrincipal: 'EMP', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Gestión Ambiental → AMB
-  { programa: 'Especialización en Gestión Ambiental',              nivel: 'Posgrado', familiaPrincipal: 'AMB', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Pedagogía, Informática para la Innovación Educativa, Educación para la Innovación Pedagógica → SOC
-  { programa: 'Especialización en Pedagogía y Docencia',           nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Informática e Innovación Educativa', nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null, prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Maestría en Educación',                             nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 3, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Auditoría en Salud, Epidemiología, Salud Pública, Economía y Gestión de la Salud → SOC
-  { programa: 'Especialización en Auditoría en Salud',             nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Maestría en Epidemiología',                         nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Gestión de la Salud Pública',     nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null,  prioridad: 3, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Derechos de Autor, Derecho Administrativo, Contratación Pública → SOC (secundaria: NEG)
-  { programa: 'Especialización en Derechos de Autor y Propiedad Industrial', nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Derecho Administrativo',         nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Contratación Pública',           nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: 'NEG', prioridad: 3, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Gestión del Talento Humano → NEG (secundaria: SOC)
-  { programa: 'Especialización en Talento Humano',                 nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: 'SOC', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Maestría en Gestión del Talento Humano',            nivel: 'Posgrado', familiaPrincipal: 'NEG', familiaSecundaria: 'SOC', prioridad: 2, nivelRequerido: ['profesional'], estado: 'Activo' },
-
-  // Otros Posgrados
-  { programa: 'Especialización en Gestión de Procesos Logísticos y Redes de Valor', nivel: 'Posgrado', familiaPrincipal: 'PRO', familiaSecundaria: 'NEG', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Gerencia de la Seguridad y Salud en el Trabajo', nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: 'PRO', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Dirección y Producción de Contenido Audiovisual', nivel: 'Posgrado', familiaPrincipal: 'CRE', familiaSecundaria: 'COM', prioridad: 1, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Desarrollo Integral de la Infancia y la Adolescencia', nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null, prioridad: 4, nivelRequerido: ['profesional'], estado: 'Activo' },
-  { programa: 'Especialización en Neuropsicología de la Educación',                nivel: 'Posgrado', familiaPrincipal: 'SOC', familiaSecundaria: null, prioridad: 5, nivelRequerido: ['profesional'], estado: 'Activo' }
+// ── AREANDINA ───────────────────────────────────────────────
+const V = { modalidad: 'Virtual' };
+export const PROGRAMAS_AREANDINA = [
+  // Pregrados
+  prog('Psicología',                                     'Pregrado',   'SOC', 'COM', 1, V),
+  prog('Comunicación Social',                            'Pregrado',   'CRE', 'COM', 1, V),
+  prog('Economía',                                       'Pregrado',   'NEG', 'PRO', 1, V),
+  prog('Marketing de Negocios',                          'Pregrado',   'COM', 'NEG', 1, V),
+  prog('Administración de Empresas',                     'Pregrado',   'NEG', 'EMP', 1, V),
+  prog('Finanzas y Negocios Internacionales',            'Pregrado',   'COM', 'NEG', 1, V),
+  prog('Ingeniería de Sistemas',                         'Pregrado',   'TEC', 'PRO', 1, V),
+  prog('Ingeniería Industrial',                          'Pregrado',   'PRO', 'TEC', 1, V),
+  prog('Licenciatura en Ciencias Sociales',              'Pregrado',   'SOC', null,  1, V),
+  prog('Licenciatura en Educación Infantil',             'Pregrado',   'SOC', null,  1, V),
+  prog('Administración en Salud',                        'Pregrado',   'SOC', 'NEG', 1, V),
+  prog('Derecho',                                        'Pregrado',   'SOC', 'NEG', 1, V),
+  prog('Administración Pública',                         'Pregrado',   'SOC', 'NEG', 2, V),
+  prog('Ingeniería de Software',                         'Pregrado',   'TEC', 'PRO', 1, V),
+  prog('Seguridad y Salud en el Trabajo',                'Pregrado',   'SOC', 'PRO', 2, V),
+  prog('Sociología',                                     'Pregrado',   'SOC', null,  2, V),
+  prog('Matemáticas y Analítica de Datos',               'Pregrado',   'TEC', 'PRO', 1, V),
+  prog('Contaduría Pública',                             'Pregrado',   'NEG', 'PRO', 1, V),
+  prog('Administración en Agronegocios',                 'Pregrado',   'AMB', 'NEG', 1, V),
+  // Tecnologías
+  prog('Tecnología en Gestión del Talento Humano',       'Tecnología', 'NEG', 'SOC', 2, V),
+  prog('Tecnología en Logística',                        'Tecnología', 'PRO', 'COM', 1, V),
+  prog('Tecnología en Producción Ganadera Sostenible',   'Tecnología', 'AMB', 'EMP', 1, V),
+  // Especializaciones
+  prog('Especialización en Derechos de Autor, Propiedad Industrial y Nuevas Tecnologías', 'Especialización', 'SOC', 'NEG', 1, V),
+  prog('Especialización en Dirección y Producción de Contenido Audiovisual',              'Especialización', 'CRE', 'COM', 1, V),
+  prog('Especialización en Infancia, Adolescencia y Desarrollo Familiar',                 'Especialización', 'SOC', null,  2, V),
+  prog('Especialización en Auditoría en Salud',                                           'Especialización', 'SOC', 'PRO', 1, V),
+  prog('Especialización en Gestión Ambiental',                                            'Especialización', 'AMB', null,  1, V),
+  prog('Especialización en Informática e Innovación Educativa',                           'Especialización', 'SOC', 'TEC', 2, V),
+  prog('Especialización en Pedagogía y Docencia',                                         'Especialización', 'SOC', null,  1, V),
+  prog('Especialización en Gerencia en Seguridad y Salud en el Trabajo',                  'Especialización', 'SOC', 'PRO', 1, V),
+  prog('Especialización en Revisoría Fiscal y Auditoría Forense',                         'Especialización', 'NEG', 'PRO', 2, V),
+  prog('Especialización en Alta Gerencia',                                                'Especialización', 'NEG', 'EMP', 1, V),
+  prog('Especialización en Gerencia Financiera',                                          'Especialización', 'NEG', null,  2, V),
+  prog('Especialización en Derecho Administrativo y Constitucional',                      'Especialización', 'SOC', 'NEG', 2, V),
+  prog('Especialización en Ciberseguridad',                                               'Especialización', 'TEC', 'PRO', 2, V),
+  // Maestrías
+  prog('Maestría en Epidemiología',                                                       'Maestría', 'SOC', 'PRO', 2, V),
+  prog('Maestría en Educación para la Innovación Pedagógica',                             'Maestría', 'SOC', 'CRE', 3, V),
+  prog('Maestría en Innovación',                                                          'Maestría', 'EMP', 'NEG', 1, V),
+  prog('Maestría en Gerencia de Mercadeo Digital',                                        'Maestría', 'COM', 'CRE', 1, V),
+  prog('Maestría en Analítica de Datos',                                                  'Maestría', 'TEC', 'PRO', 1, V),
+  prog('Maestría en Inteligencia de Negocios',                                            'Maestría', 'NEG', 'TEC', 3, V),
+  prog('Maestría en Gestión del Talento Humano',                                          'Maestría', 'NEG', 'SOC', 2, V),
 ];
+
+// ── IBERO ───────────────────────────────────────────────────
+export const PROGRAMAS_IBERO = [
+  // Pregrados
+  prog('Trabajo Social',                                 'Pregrado', 'SOC', 'COM', 1),
+  prog('Derecho',                                        'Pregrado', 'SOC', 'NEG', 1),
+  prog('Licenciatura en Matemáticas',                    'Pregrado', 'SOC', 'TEC', 2),
+  prog('Licenciatura en Educación Infantil',             'Pregrado', 'SOC', null,  1),
+  prog('Licenciatura en Educación Especial',             'Pregrado', 'SOC', null,  1),
+  prog('Mercadeo y Publicidad',                          'Pregrado', 'COM', 'CRE', 1),
+  prog('Negocios Internacionales',                       'Pregrado', 'COM', 'NEG', 1),
+  prog('Administración Financiera',                      'Pregrado', 'NEG', 'PRO', 1),
+  prog('Administración de Empresas',                     'Pregrado', 'NEG', 'EMP', 1),
+  prog('Administración en Salud',                        'Pregrado', 'SOC', 'NEG', 1),
+  prog('Seguridad y Salud en el Trabajo',                'Pregrado', 'SOC', 'PRO', 2, V),
+  prog('Contaduría Pública',                             'Pregrado', 'NEG', 'PRO', 1, V),
+  prog('Economía',                                       'Pregrado', 'NEG', 'PRO', 1, V),
+  prog('Ingeniería Industrial',                          'Pregrado', 'PRO', 'TEC', 1),
+  prog('Ingeniería de Sistemas',                         'Pregrado', 'TEC', 'PRO', 1),
+  prog('Ingeniería de Software',                         'Pregrado', 'TEC', 'PRO', 1),
+  // Posgrados
+  prog('Doctorado en Educación',                                                 'Doctorado',       'SOC', null,  4),
+  prog('Maestría en Educación',                                                  'Maestría',        'SOC', null,  2),
+  prog('Maestría en Gerencia de Proyectos',                                      'Maestría',        'NEG', 'PRO', 2),
+  prog('Maestría en Seguridad y Salud en el Trabajo',                            'Maestría',        'SOC', 'PRO', 2),
+  prog('Maestría en Ambientes Digitales para la Educación',                      'Maestría',        'SOC', 'TEC', 2),
+  prog('Maestría en Administración de Empresas MBA',                             'Maestría',        'NEG', 'EMP', 2),
+  prog('Especialización en Inteligencia de Negocios',                            'Especialización', 'NEG', 'TEC', 2),
+  prog('Especialización en Gestión de Procesos Logísticos y Redes de Valor',     'Especialización', 'PRO', 'NEG', 1),
+  prog('Especialización en Inteligencia Artificial',                             'Especialización', 'TEC', 'PRO', 1),
+  prog('Especialización en Gestión de la Salud Pública',                         'Especialización', 'SOC', null,  2),
+  prog('Especialización en Gerencia Financiera',                                 'Especialización', 'NEG', null,  2),
+  prog('Especialización en Gerencia de la Seguridad y Salud en el Trabajo',      'Especialización', 'SOC', 'PRO', 1),
+  prog('Especialización en Gerencia de la Calidad en Salud',                     'Especialización', 'SOC', 'PRO', 2, V),
+  prog('Especialización en Desarrollo Integral de la Infancia y la Adolescencia','Especialización', 'SOC', null,  2),
+  prog('Especialización en Neuropsicología de la Educación',                     'Especialización', 'SOC', null,  2),
+  prog('Especialización en Ciberseguridad',                                      'Especialización', 'TEC', 'PRO', 2, V),
+  prog('Especialización en Gerencia de Proyectos',                               'Especialización', 'NEG', 'PRO', 1),
+  prog('Especialización en Alta Gerencia',                                       'Especialización', 'NEG', 'EMP', 1, V),
+  prog('Especialización en Marketing Digital',                                   'Especialización', 'COM', 'CRE', 1, V),
+  prog('Especialización en Analítica y Big Data',                                'Especialización', 'TEC', 'PRO', 1),
+  prog('Especialización en Auditoría en Salud',                                  'Especialización', 'SOC', 'PRO', 1),
+  prog('Especialización en Revisoría Fiscal',                                    'Especialización', 'NEG', 'PRO', 2),
+  prog('Especialización en Talento Humano',                                      'Especialización', 'NEG', 'SOC', 1),
+  prog('Especialización en Docencia Universitaria',                              'Especialización', 'SOC', null,  1),
+  prog('Especialización en Derecho Administrativo',                              'Especialización', 'SOC', 'NEG', 2),
+];
+
+export const PROGRAMAS_POR_UNIVERSIDAD = {
+  areandina: PROGRAMAS_AREANDINA,
+  ibero: PROGRAMAS_IBERO,
+};
 
 // ─── MENSAJES IPMV (Índice Preparación Modalidad Virtual) ───
 export const MENSAJES_IPMV = {

@@ -21,6 +21,23 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
+  --color-muted: #64748B;
+  --color-subtle: #94A3B8;
+  --color-border: #E2E8F0;
+  --color-surface: #FFFFFF;
+  --color-heading: #0F172A;
+}
+
+/* Color de acento según la universidad elegida */
+[data-uni="areandina"] {
+  --color-primary: #1A5DAB;
+  --color-primary-dark: #0F3D7A;
+  --color-light-blue: #4DACE8;
+}
+[data-uni="ibero"] {
+  --color-primary: #0E7C72;
+  --color-primary-dark: #08534C;
+  --color-light-blue: #2BB5A4;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,6 +46,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
+  line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
