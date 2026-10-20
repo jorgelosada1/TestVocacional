@@ -396,7 +396,8 @@ function PantallaMotivaciones({ answers, onChange, onNext, onBack }) {
 // PANTALLA 9: CONTEXTO TERRITORIAL
 // ═══════════════════════════════════════════════════════════════
 function PantallaContexto({ answers, onChange, onNext, onBack, departamento }) {
-  const allAnswered = PREGUNTAS_CONTEXTO.every(q => {
+  const visibleQuestions = PREGUNTAS_CONTEXTO.filter(q => !q.showIf || q.showIf({ departamento }));
+  const allAnswered = visibleQuestions.every(q => {
     if (q.type === 'multi') return answers[q.id] && answers[q.id].length > 0;
     return !!answers[q.id];
   });
@@ -417,7 +418,7 @@ function PantallaContexto({ answers, onChange, onNext, onBack, departamento }) {
       <div className="readonly-value"><MapPin size={18} weight="fill" /> {departamento}</div>
     </div>
 
-    {PREGUNTAS_CONTEXTO.map((q, i) => {
+    {visibleQuestions.map((q, i) => {
       if (q.type === 'multi') {
         return <CheckboxQuestion key={q.id} q={q} values={answers[q.id] || []} index={i + 1}
           onChange={vals => onChange({...answers, [q.id]: vals})} />;

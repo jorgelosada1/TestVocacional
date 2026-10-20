@@ -243,6 +243,8 @@ export const PREGUNTAS_CONTEXTO = [
     id: 'ctx_2',
     question: '¿Cuál de estas situaciones describe mejor tu lugar de residencia?',
     type: 'single',
+    // Bogotá es Distrito Capital: la pregunta no aplica
+    showIf: ({ departamento }) => departamento !== 'Bogotá D.C.',
     options: [
       'Capital de departamento.',
       'Municipio intermedio.',
